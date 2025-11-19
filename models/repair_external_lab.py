@@ -2,33 +2,32 @@ from odoo import models, fields
 
 class RepairExternalLab(models.Model):
     _name = 'tech.repair.external.lab'
-    _description = 'Interventi di Laboratori Esterni'
+    _description = 'External Laboratory Interventions'
     _order = 'send_date desc, lab_id asc'
 
     tech_repair_order_id = fields.Many2one(
-        'tech.repair.order', string='Riparazione', ondelete='cascade'
-    )  # Collegamento alla riparazione
+        'tech.repair.order', string='Repair', ondelete='cascade'
+    )  # Connection to the repair
 
     lab_id = fields.Many2one(
-        'res.partner', string='Laboratorio',
+        'res.partner', string='Laboratory',
         domain=[('is_company', '=', True)], required=True
-    )  # Selezione del laboratorio esterno
+    )  # Selection of external laboratory
 
-    operation_description = fields.Text(string='Descrizione Operazione')
-    external_cost = fields.Float(string='Costo a Noi', default=0.0)
-    customer_cost = fields.Float(string='Costo al Cliente', default=0.0)
+    operation_description = fields.Text(string='Operation Description')
+    external_cost = fields.Float(string='Cost to Us', default=0.0)
+    customer_cost = fields.Float(string='Cost to Customer', default=0.0)
 
-     # Data invio merce
-    send_date = fields.Datetime(string='Data Partito da TECH', readonly=False)
+     # Goods shipment date
+    send_date = fields.Datetime(string='Date Left from TECH', readonly=False)
 
-    # Data ritiro merce
+    # Goods return date
     out_date = fields.Datetime(
-        string='Data Rientrato',
+        string='Date Returned',
         readonly=False,
     )
 
     add_to_sum = fields.Boolean(
-        string="Aggiungi al totale", 
+        string="Add to total", 
         default=True
     )
-

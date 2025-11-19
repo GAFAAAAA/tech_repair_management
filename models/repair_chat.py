@@ -2,20 +2,20 @@ from odoo import models, fields, api
 
 class RepairChatMessage(models.Model):
     _name = 'tech.repair.chat.message'
-    _description = 'Messaggi Chat Riparazione'
+    _description = 'Repair Chat Messages'
     _order = 'create_date asc'
 
     tech_repair_order_id = fields.Many2one(
         'tech.repair.order', 
-        string="Riparazione", 
+        string="Repair", 
         required=True, 
         ondelete='cascade'
     )
 
     sender = fields.Selection([
-        ('customer', 'Cliente'),
-        ('technician', 'Tecnico')
-    ], string="Mittente", required=True, default='technician')
+        ('customer', 'Customer'),
+        ('technician', 'Technician')
+    ], string="Sender", required=True, default='technician')
 
-    message = fields.Text(string="Messaggio", required=True)
-    create_date = fields.Datetime(string="Data", default=fields.Datetime.now, readonly=True)
+    message = fields.Text(string="Message", required=True)
+    create_date = fields.Datetime(string="Date", default=fields.Datetime.now, readonly=True)

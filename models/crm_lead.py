@@ -5,6 +5,6 @@ class CrmLead(models.Model):
 
     repair_order_id = fields.Many2one(
         'tech.repair.order',
-        string="Commessa di Riparazione",
-        help="Commessa di Riparazione associata al Lead"
+        string="Repair Job",
+        help="Repair Job associated with the Lead"
     )

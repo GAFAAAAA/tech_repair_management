@@ -2,11 +2,11 @@ from odoo import models, fields, api
 
 class RepairSoftwareLine(models.Model):
     _name = 'tech.repair.software.line'
-    _description = 'Riga Software per la commessa di riparazione'
+    _description = 'Software Line for repair job'
 
     repair_order_id = fields.Many2one(
         'tech.repair.order', 
-        string="Commessa di riparazione", 
+        string="Repair Job", 
         required=True, 
         ondelete='cascade'
     )
@@ -16,24 +16,24 @@ class RepairSoftwareLine(models.Model):
         required=True
     )
     add_to_sum = fields.Boolean(
-        string="Aggiungi al totale", 
+        string="Add to total", 
         default=True
     )
 
 
-    # Campi correlati per visualizzare le informazioni del software
+    # Related fields to display software information
     software_price = fields.Float(
         related='software_id.price', 
-        string="Prezzo", 
+        string="Price", 
         readonly=True
     )
     software_renewal_required = fields.Boolean(
         related='software_id.renewal_required', 
-        string="Rinnovo Richiesto", 
+        string="Renewal Required", 
         readonly=True
     )
     software_duration = fields.Selection(
         related='software_id.duration', 
-        string="Durata", 
+        string="Duration", 
         readonly=True
     )
