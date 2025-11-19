@@ -3,7 +3,7 @@
         <field name="name">tech.repair.term.form</field>
         <field name="model">tech.repair.term</field>
         <field name="arch" type="xml">
-            <form string="Informativa Riparazioni">
+            <form string="Repair Terms">
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -19,7 +19,7 @@
         <field name="name">tech.repair.term.list</field>
         <field name="model">tech.repair.term</field>
         <field name="arch" type="xml">
-            <list string="Informative Riparazioni">
+            <list string="Repair Terms">
                 <field name="name"/>
                 <field name="predefinita"/>
             </list>
@@ -28,7 +28,7 @@
 
 
     <record id="action_tech_repair_term" model="ir.actions.act_window">
-        <field name="name">Informative Riparazioni</field>
+        <field name="name">Repair Terms</field>
         <field name="res_model">tech.repair.term</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">list,form</field>

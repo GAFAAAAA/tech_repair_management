@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Lista dei software installabili -->
+    <!-- List of installable software -->
     <record id="view_tech_repair_software_tree" model="ir.ui.view">
         <field name="name">tech.repair.software.list</field>
         <field name="model">tech.repair.software</field>
@@ -14,12 +14,12 @@
         </field>
     </record>
 
-    <!-- Vista Form per gestire i software -->
+    <!-- Form View to manage software -->
     <record id="view_tech_repair_software_form" model="ir.ui.view">
         <field name="name">tech.repair.software.form</field>
         <field name="model">tech.repair.software</field>
         <field name="arch" type="xml">
-            <form string="Software Installato">
+            <form string="Installed Software">
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -29,8 +29,8 @@
                     </group>
                 </sheet>
                 <!-- <footer>
-                    <button string="Salva" type="object" name="save" class="oe_highlight"/>
-                    <button string="Annulla" class="oe_link" special="cancel"/>
+                    <button string="Save" type="object" name="save" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
                 </footer> -->
             </form>
         </field>
@@ -38,7 +38,7 @@
 
 
     <record id="action_tech_repair_software" model="ir.actions.act_window">
-        <field name="name">Software Installati</field>
+        <field name="name">Installed Software</field>
         <field name="res_model">tech.repair.software</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">list,form</field>
