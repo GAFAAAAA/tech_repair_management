@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
-    <template id="tech_repair_status_page" name="Stato Riparazione">
+    <template id="tech_repair_status_page" name="Repair Status">
         <t t-call="website.layout">
             <div class="container">
                 <h4 class="text-center mt-4">Repair Status</h4>
@@ -16,10 +16,10 @@
                         </colgroup>
                             <tr>
                                 <td class="text-start">
-                                    <h4><strong>Dispositivo:</strong> <br/> <t t-esc="repair.category_id.name"/> <t t-esc="repair.model_id.name"/></h4>
+                                    <h4><strong>Device:</strong> <br/> <t t-esc="repair.category_id.name"/> <t t-esc="repair.model_id.name"/></h4>
                                 </td>
                                 <td class="text-center">
-                                    <h5><strong>Stato Attuale: </strong><br/><t t-esc="customer_state"/></h5>
+                                    <h5><strong>Current Status: </strong><br/><t t-esc="customer_state"/></h5>
                                 </td>
                             </tr>
                         </table>
@@ -27,27 +27,27 @@
                         <table class="table table-borderless table-sm" style="border-collapse: collapse;">
                             <tbody>
                                 <tr>
-                                    <td style="font-size:13px; padding: 5px;"><strong>Numero Riparazione: </strong><t t-esc="repair.name"/></td> 
-                                    <td style="font-size:13px; padding: 5px;"><strong>Seriale: </strong><t t-esc="repair.serial_number"/></td> 
-                                    <td style="font-size:13px; padding: 5px;"><strong>Costo Stimato: </strong>€ <t t-esc="repair.expected_total"/></td>
+                                    <td style="font-size:13px; padding: 5px;"><strong>Repair Number: </strong><t t-esc="repair.name"/></td> 
+                                    <td style="font-size:13px; padding: 5px;"><strong>Serial: </strong><t t-esc="repair.serial_number"/></td> 
+                                    <td style="font-size:13px; padding: 5px;"><strong>Estimated Cost: </strong>€ <t t-esc="repair.expected_total"/></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <a t-att-href="'/repairstatus/pdf/%s' % repair.token_url" class="btn btn-info mt-3 btn-sm">
-                                            Check-In Riparazione
+                                            Repair Check-In
                                         </a>
                                     </td>
-                                    <td style="font-size:13px; padding: 5px;"><strong>Aperta il: </strong><t t-esc="open_date"/></td>
-                                    <td style="font-size:13px; padding: 5px;"><strong>Ultimo Aggiornamento: </strong><t t-esc="last_modified_date"/></td>
+                                    <td style="font-size:13px; padding: 5px;"><strong>Opened on: </strong><t t-esc="open_date"/></td>
+                                    <td style="font-size:13px; padding: 5px;"><strong>Last Update: </strong><t t-esc="last_modified_date"/></td>
                                 </tr>
                                 
                             </tbody>
                         </table>
                     </div>
 
-                    <!-- AREA CHAT -->
+                    <!-- CHAT AREA -->
                     <div class="card p-4 mt-3">
-                        <h4>Chat con il Tecnico</h4>
+                        <h4>Chat with Technician</h4>
                         <div class="chat-box" style="min-height: 200px; max-height: 300px; overflow-y: scroll; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
                             <t t-foreach="chat_messages" t-as="chat">
                                 <t t-set="is_customer" t-value="chat.sender == 'customer'"/>
@@ -63,7 +63,7 @@
                                 </div>
                                 <div t-if="is_technician" class="alert alert-secondary" style="font-size:13px;">
                                     <strong>
-                                        Tecnico (<t t-esc="repair.assigned_to.name"/>) 
+                                        Technician (<t t-esc="repair.assigned_to.name"/>) 
                                         <t t-esc="chat.create_date.strftime('%d/%m/%Y %H:%M')"/>
                                     </strong>
                                     <br/>
@@ -72,17 +72,17 @@
                             </t>
                         </div>
 
-                        <!-- Form per inviare messaggi -->
+                        <!-- Form to send messages -->
                         <form action="/repairstatus/send_message" method="post" style="padding: 10px;">
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             <input type="hidden" name="token" t-att-value="repair.token_url"/>
-                            <textarea name="customer_message" class="form-control" rows="2" placeholder="Scrivi un messaggio..." t-att-required="1"></textarea>
-                            <button type="submit" class="btn btn-secondary mt-2">Invia</button>
+                            <textarea name="customer_message" class="form-control" rows="2" placeholder="Write a message..." t-att-required="1"></textarea>
+                            <button type="submit" class="btn btn-secondary mt-2">Send</button>
                         </form>
                     </div>
                 </t>
                 <t t-else="">
-                    <div class="alert alert-danger mt-3">Riparazione non trovata.</div>
+                    <div class="alert alert-danger mt-3">Repair not found.</div>
                 </t>
             </div>
         </t>
