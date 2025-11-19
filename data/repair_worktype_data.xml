@@ -1,61 +1,61 @@
 <odoo>
     <record id="tech_repair_worktype_simple_format" model="tech.repair.worktype">
-        <field name="name">Formattazione Senza Salvataggio Dati</field>
-        <field name="description">Formattazione Semplice</field>
+        <field name="name">Formatting Without Data Backup</field>
+        <field name="description">Simple Formatting</field>
         <field name="price">60</field>
         <field name="stimated_time">3</field>
     </record>
     <record id="tech_repair_worktype_format" model="tech.repair.worktype">
-        <field name="name">Formattazione Con Salvataggio Dati</field>
-        <field name="description">Formattazione Con Salvataggio Dati</field>
+        <field name="name">Formatting With Data Backup</field>
+        <field name="description">Formatting With Data Backup</field>
         <field name="price">80</field>
         <field name="stimated_time">3</field>
     </record>
     <record id="tech_repair_worktype_simple_phonemove" model="tech.repair.worktype">
-        <field name="name">Passaggio Dati Senza Recupero Credenziali</field>
-        <field name="description">Passaggio Dati tra 2 smartphone senza recupero delle credenziali</field>
+        <field name="name">Data Transfer Without Credential Recovery</field>
+        <field name="description">Data transfer between 2 smartphones without credential recovery</field>
         <field name="price">30</field>
         <field name="stimated_time">1</field>
     </record>
     <record id="tech_repair_worktype_phonemove" model="tech.repair.worktype">
-        <field name="name">Passaggio Dati Con Recupero Credenziali</field>
-        <field name="description">Passaggio Dati tra 2 smartphone con recupero delle credenziali</field>
+        <field name="name">Data Transfer With Credential Recovery</field>
+        <field name="description">Data transfer between 2 smartphones with credential recovery</field>
         <field name="price">40</field>
         <field name="stimated_time">1</field>
     </record>
     <record id="tech_repair_worktype_pass_reset" model="tech.repair.worktype">
-        <field name="name">Ripristino / Reset Password</field>
-        <field name="description">Reset Password</field>
+        <field name="name">Password Restore / Reset</field>
+        <field name="description">Password Reset</field>
         <field name="price">30</field>
         <field name="stimated_time">1</field>
     </record>
     <record id="tech_repair_worktype_license" model="tech.repair.worktype">
-        <field name="name">Aggiornamento Licenze</field>
-        <field name="description">Aggiornamento Licenze Software</field>
+        <field name="name">License Update</field>
+        <field name="description">Software License Update</field>
         <field name="price">0</field>
         <field name="stimated_time">1</field>
     </record>
     <record id="tech_repair_worktype_recovery" model="tech.repair.worktype">
-        <field name="name">Recupero Dati</field>
-        <field name="description">Recupero Dati da Vostro dispositivo</field>
+        <field name="name">Data Recovery</field>
+        <field name="description">Data recovery from your device</field>
         <field name="price">80</field>
         <field name="stimated_time">10</field>
     </record>
     <record id="tech_repair_worktype_ori_component" model="tech.repair.worktype">
-        <field name="name">Sost. Con Parti Originali</field>
-        <field name="description">Sostituzione con parti originali su Vostro dispositivo</field>
+        <field name="name">Replace with Original Parts</field>
+        <field name="description">Replacement with original parts on your device</field>
         <field name="price">0</field>
         <field name="stimated_time">3</field>
     </record>
     <record id="tech_repair_worktype_comp_component" model="tech.repair.worktype">
-        <field name="name">Sost. Con Parti Compatibili</field>
-        <field name="description">Sostituzione con parti compatibili su Vostro dispositivo</field>
+        <field name="name">Replace with Compatible Parts</field>
+        <field name="description">Replacement with compatible parts on your device</field>
         <field name="price">0</field>
         <field name="stimated_time">3</field>
     </record>
     <record id="tech_repair_worktype_warranty" model="tech.repair.worktype">
-        <field name="name">Gestione Garanzia</field>
-        <field name="description">Gestione garanzia Vostro dispositivo</field>
+        <field name="name">Warranty Management</field>
+        <field name="description">Warranty management for your device</field>
         <field name="price">0</field>
         <field name="stimated_time">15</field>
     </record>

@@ -1,7 +1,7 @@
 {
-    'name': 'TECH 3.0 Srl Riparazioni',
+    'name': 'TECH 3.0 Srl Repairs',
     'version': '1.0',
-    'summary': 'Commesse Riparazioni in Odoo 18',
+    'summary': 'Repair Orders in Odoo 18',
     'description': 'Management Tech Laboratory with Clients Online Chat',
     'author': 'TECH 3.0 Srl',
     'category': 'Services',
