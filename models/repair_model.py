@@ -1,10 +1,10 @@
 from odoo import models, fields
 
-# gestione dispositivi da riparare
+# repair device management
 class RepairModel(models.Model):
     _name = 'tech.repair.model'
-    _description = 'Modello Dispositivo'
+    _description = 'Device Model'
 
-    name = fields.Char(string='Modello', required=True)
-    brand_id = fields.Many2one('tech.repair.brand', string='Marca')
+    name = fields.Char(string='Model', required=True)
+    brand_id = fields.Many2one('tech.repair.brand', string='Brand')
     

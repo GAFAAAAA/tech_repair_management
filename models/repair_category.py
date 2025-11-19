@@ -1,9 +1,9 @@
 from odoo import models, fields
 
-# gestione categorie
+# category management
 class RepairCategory(models.Model):
 
     _name = 'tech.repair.category'
-    _description = 'Categoria Dispositivo'
+    _description = 'Device Category'
 
-    name = fields.Char(string='Categoria', required=True)
+    name = fields.Char(string='Category', required=True)

@@ -1,23 +1,22 @@
 from odoo import models, fields
 
-# Modello per gli stati delle riparazioni
+# Model for repair states
 class RepairState(models.Model):
     _name = 'tech.repair.state'
-    _description = 'Stati Riparazione'
+    _description = 'Repair States'
 
-    # Nome dello stato (es. In attesa, In riparazione, Completato)
-    name = fields.Char(string='Nome Stato', required=True)
-    # Ordine di visualizzazione degli stati
-    sequence = fields.Integer(string='Ordine', default=10)
-    # Flag che imposta se chiudere o meno la commessa
-    is_closed = fields.Boolean(string='È uno stato di chiusura?', default=False)  # Flag per definire gli stati chiusi
-    # Flag per laboratori esterni
-    is_external_lab = fields.Boolean(string='Operazione da Laboratorio Esterno?', default=False)  
+    # State name (e.g. Waiting, In repair, Completed)
+    name = fields.Char(string='State Name', required=True)
+    # Display order of states
+    sequence = fields.Integer(string='Order', default=10)
+    # Flag that sets whether or not to close the job
+    is_closed = fields.Boolean(string='Is this a closing state?', default=False)  # Flag to define closed states
+    # Flag for external laboratories
+    is_external_lab = fields.Boolean(string='External Laboratory Operation?', default=False)  
 
-    # Collegamento con lo stato visibile al cliente
+    # Connection with the customer visible state
     public_state_id = fields.Many2one(
         'tech.repair.state.public',
-        string="Stato Visibile al Cliente",
-        help="Quando questo stato è impostato, lo stato pubblico assegnato viene aggiornato automaticamente."
+        string="Customer Visible Status",
+        help="When this state is set, the assigned public state is automatically updated."
     )
-
