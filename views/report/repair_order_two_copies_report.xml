@@ -71,9 +71,6 @@
                                             Cliente:
                                             <b><span t-field="o.customer_id.display_name"/></b>
                                             <br/>
-                                            Telefono:
-                                            <b><span t-field="o.customer_id.mobile"/></b>
-                                            <br/>
                                             Mail:
                                             <b><span t-field="o.customer_id.email"/></b>
                                         </p>

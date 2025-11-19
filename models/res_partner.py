@@ -10,6 +10,6 @@ class ResPartner(models.Model):
         if self._context.get('from_tech_repair_order'):
             for vals in vals_list:
                 # Ensure either phone or email is provided
-                if not vals.get('phone') and not vals.get('email') and not vals.get('mobile'):
-                    raise ValidationError("To save a contact, you need either a landline phone number, a mobile phone number, or an email!")
+                if not vals.get('phone') and not vals.get('email') :
+                    raise ValidationError("To save a contact, you need either a landline phone number, or an email!")
         return super().create(vals_list)

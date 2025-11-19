@@ -183,7 +183,6 @@
             <list>
                 <field name="name"/>
                 <field name="customer_id"/>
-                <field name="customer_mobile"/>
                 <field name="category_id"/>
                 <field name="brand_id"/>
                 <field name="model_id"/>

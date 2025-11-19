@@ -27,7 +27,6 @@ class RepairOrder(models.Model):
 
     # Customer associated with the repair
     customer_id = fields.Many2one('res.partner', string='Customer', required=True, context={'from_tech_repair_order': True})
-    customer_mobile = fields.Char(string="Mobile", related="customer_id.mobile", store=True)
     
     # category -> brand -> model
     category_id = fields.Many2one('tech.repair.device.category', string='Category', required=True)
@@ -787,7 +786,6 @@ class RepairOrder(models.Model):
                 <strong><a href="{self.env['ir.config_parameter'].sudo().get_param('web.base.url')}/web#id={record.id}&model=tech.repair.order&view_type=form">{record.name}</a></strong> 
                 per <strong>{record.customer_id.name}</strong>.</p>
                 <p><strong>Scadenza:</strong> {record.renewal_date.strftime('%d/%m/%Y') if record.renewal_date else 'Data non disponibile'}</p>
-                <p><strong>Contatto:</strong> {record.customer_id.mobile or 'Non disponibile'}</p>
                 <p><strong>Mail:</strong> {record.customer_id.email or 'Non disponibile'}</p>
                 <p><strong>Software da rinnovare:</strong></p>
                 <ul>
