@@ -3,18 +3,18 @@
         <data noupdate="1">
             <record id="email_template_repair_renewal" model="mail.template">
                 <field name="model_id" ref="model_tech_repair_order"/>
-                <field name="name">TECH Rinnovo Licenze Software</field>
+                <field name="name">TECH Software License Renewal</field>
                 <field name="email_from">{{ object.company_id.email }}</field>
                 <field name="email_to">{{ object.customer_id.email }}</field>
-                <field name="subject">{{ object.company_id.name }} - Rinnovo Licenze Software</field>
+                <field name="subject">{{ object.company_id.name }} - Software License Renewal</field>
                 <field name="auto_delete" eval="True"/>
                 <field name="body_html" type="html">
-                    <p>Buongiorno <t t-out="object.customer_id.name or ''"/>,</p>
-                    <p>Ti ricordiamo che i software installati sul tuo pc sono in scadenza il <strong> <t t-out="object.renewal_date.strftime('%d/%m/%Y')"/> </strong>.</p>
-                    <p>Per evitare problemi, ti consigliamo di contattarci per il rinnovo.</p>
-                    <p> Software in scadenza:</p>
+                    <p>Good morning <t t-out="object.customer_id.name or ''"/>,</p>
+                    <p>We remind you that the software installed on your PC will expire on <strong> <t t-out="object.renewal_date.strftime('%d/%m/%Y')"/> </strong>.</p>
+                    <p>To avoid any issues, we recommend contacting us for renewal.</p>
+                    <p>Expiring software:</p>
                     <t t-out="object.renewal_softwares"/>
-                    <p>Grazie!</p>
+                    <p>Thank you!</p>
                     <p>Staff - TECH 3.0®</p>
                 </field>
             </record>

@@ -2,9 +2,9 @@ from odoo import models, fields
 
 class RepairStatePublic(models.Model):
     _name = 'tech.repair.state.public'
-    _description = 'Stati Visibili ai Clienti'
+    _description = 'Customer Visible States'
     _order = 'sequence asc'
 
-    name = fields.Char(string="Nome Stato Cliente", required=True)
-    description = fields.Text(string="Descrizione Stato")
-    sequence = fields.Integer(string="Ordine", default=10)
+    name = fields.Char(string="Customer State Name", required=True)
+    description = fields.Text(string="State Description")
+    sequence = fields.Integer(string="Order", default=10)

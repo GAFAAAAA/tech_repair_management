@@ -1,9 +1,9 @@
 from odoo import models, fields
 
-#modulo gestione brand
+#brand management module
 class RepairBrand(models.Model):
     _name = 'tech.repair.brand'
-    _description = 'Marca Dispositivo'
+    _description = 'Device Brand'
 
-    name = fields.Char(string='Marca', required=True)
+    name = fields.Char(string='Brand', required=True)
     

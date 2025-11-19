@@ -94,4 +94,4 @@ Customers can send messages/requests via the public repair status page.
 Technician responses are logged in the Chatter and sent via email notifications.
 
 
-**Available Language: only Italian for now**
+**Available Languages: Italian and English**

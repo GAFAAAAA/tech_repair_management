@@ -3,69 +3,69 @@
         <field name="name">tech.repair.order.form</field>
         <field name="model">tech.repair.order</field>
         <field name="arch" type="xml">
-            <form string="Gestione Riparazioni">
+            <form string="Repair Management">
                 <header>
                     <field name="state_id" widget="badge" options="{'clickable': True}"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <div class="btn-group">
-                            <button name="action_save_repair" type="object" string="Salva" class="oe_highlight" icon="fa-save"/>
-                            <!-- Dropdown Stampa -->
-                            <button name="stampa_tech_dropdown_order" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">Stampa</button>
+                            <button name="action_save_repair" type="object" string="Save" class="oe_highlight" icon="fa-save"/>
+                            <!-- Dropdown Print -->
+                            <button name="stampa_tech_dropdown_order" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">Print</button>
                             <div class="dropdown-menu" role="menu">
                                 <button name="action_print_repair_report" type="object" class="dropdown-item" string="Report" icon="fa-print"/>
                                 <button name="action_print_repair_two_copies_report" type="object" class="dropdown-item" string="Report2" icon="fa-print"/>
                             </div>
-                            <!-- Dropdown Azioni -->
-                            <button name="azioni_tech_dropdown_order" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">Azioni</button>
+                            <!-- Dropdown Actions -->
+                            <button name="azioni_tech_dropdown_order" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">Actions</button>
                             <div class="dropdown-menu" role="menu">
-                                <button name="action_force_send_renewal_email" type="object" class="dropdown-item" string="Invia Email di Rinnovo" icon="fa-envelope-open-o"/>
+                                <button name="action_force_send_renewal_email" type="object" class="dropdown-item" string="Send Renewal Email" icon="fa-envelope-open-o"/>
                             </div>
                         </div>       
                     </div>
                     <group>
                         <group>
-                            <field name="name" readonly="1"/>  <!-- Numero Riparazione (Generato Automaticamente) -->
-                            <field name="customer_id" placeholder="Cliente" context="{'from_tech_repair_order': True}"/> <!-- Cliente options="{'no_create': True}"-->
-                            <field name="category_id" placeholder="Categoria" required="1"/>  <!-- Categoria -->
-                            <field name="brand_id" placeholder="Marca" required="1"/>  <!-- Marca domain="[('category_id', '=', category_id)]"-->
-                            <field name="model_id" placeholder="Modello" required="1" domain="[('brand_id', '=', brand_id)]"/>  <!-- Modello -->
-                            <field name="model_variant" placeholder="es. Pro Max"/> <!-- variante -->
-                            <field name="device_color" placeholder="Colore" widget="many2one_tags"/> <!-- Colore -->
-                            <field name="aesthetic_condition"/> <!-- Condizioni Estetiche -->
-                            <field name="aesthetic_state" placeholder="es. Graffi sulla scocca"/> 
-                            <field name="serial_number" placeholder="0123456789"/>  <!-- Numero Seriale -->
+                            <field name="name" readonly="1"/>  <!-- Repair Number (Automatically Generated) -->
+                            <field name="customer_id" placeholder="Customer" context="{'from_tech_repair_order': True}"/> <!-- Customer options="{'no_create': True}"-->
+                            <field name="category_id" placeholder="Category" required="1"/>  <!-- Category -->
+                            <field name="brand_id" placeholder="Brand" required="1"/>  <!-- Brand domain="[('category_id', '=', category_id)]"-->
+                            <field name="model_id" placeholder="Model" required="1" domain="[('brand_id', '=', brand_id)]"/>  <!-- Model -->
+                            <field name="model_variant" placeholder="e.g. Pro Max"/> <!-- variant -->
+                            <field name="device_color" placeholder="Color" widget="many2one_tags"/> <!-- Color -->
+                            <field name="aesthetic_condition"/> <!-- Aesthetic Conditions -->
+                            <field name="aesthetic_state" placeholder="e.g. Scratches on body"/> 
+                            <field name="serial_number" placeholder="0123456789"/>  <!-- Serial Number -->
                             <field name="worktype"/>
-                            <field name="problem_description" placeholder="es. Non funziona il touch"/>  <!-- Descrizione Problema -->
+                            <field name="problem_description" placeholder="e.g. Touch not working"/>  <!-- Problem Description -->
                             <field name="sim_pin" placeholder="0000"/>
                             <field name="device_password" placeholder="Password"/>
                         </group>
                         <group>
-                            <field name="state_id" required="1"/>  <!-- Stato della riparazione -->
-                            <field name="customer_state_id"/>  <!-- Stato Visibile al Cliente -->
+                            <field name="state_id" required="1"/>  <!-- Repair status -->
+                            <field name="customer_state_id"/>  <!-- Customer Visible Status -->
                             <field name="open_date" readonly="1"/>
                             <field name="stimated_date" readonly="1"/>
                             <field name="close_date" readonly="1"/>
                             <field name="last_modified_date" readonly="1"/>
-                            <field name="opened_by"/>  <!-- Tecnico che apre la riparazione -->
-                            <field name="assigned_to"/>  <!-- Tecnico assegnato -->
-                            <field name="tech_repair_cost"/>  <!-- Costo Riparazione -->
-                            <field name="advance_payment"/>  <!-- Acconto -->
-                            <field name="discount_amount"/>  <!-- Sconto -->
-                            <field name="expected_total" readonly="1"/>  <!-- Totale Previsto -->
-                            <field name="loaner_device_id" domain="[('status', '=', 'available')]"/> <!-- Muletto -->
+                            <field name="opened_by"/>  <!-- Technician who opens the repair -->
+                            <field name="assigned_to"/>  <!-- Assigned technician -->
+                            <field name="tech_repair_cost"/>  <!-- Repair Cost -->
+                            <field name="advance_payment"/>  <!-- Down Payment -->
+                            <field name="discount_amount"/>  <!-- Discount -->
+                            <field name="expected_total" readonly="1"/>  <!-- Expected Total -->
+                            <field name="loaner_device_id" domain="[('status', '=', 'available')]"/> <!-- Loaner -->
                         </group>
                     </group>
 
                     <group>
                         <group>
-                            <field name="signature" widget="signature" readonly="signature_locked"/> <!-- Widget della firma -->
-                            <button name="action_unlock_signature" type="object" string="Modifica Firma" class="btn-secondary btn-sm" invisible="signature_locked == False"/>
+                            <field name="signature" widget="signature" readonly="signature_locked"/> <!-- Signature widget -->
+                            <button name="action_unlock_signature" type="object" string="Edit Signature" class="btn-secondary btn-sm" invisible="signature_locked == False"/>
                         </group>
                         <group name="qr_code">
-                            <field name="qr_code" widget="image" class="oe_avatar"/> <!-- Sezione per il QR Code -->
-                            <field name="qr_code_int" widget="image" class="oe_avatar"/> <!-- Sezione per il QR Code Interno -->
+                            <field name="qr_code" widget="image" class="oe_avatar"/> <!-- Customer QR Code section -->
+                            <field name="qr_code_int" widget="image" class="oe_avatar"/> <!-- Internal QR Code section -->
                         </group>
                     </group>
 
@@ -74,18 +74,18 @@
                             
                         </group>
                         <group>
-                            <field name="term_id"/> <!-- infomativa scelta -->
+                            <field name="term_id"/> <!-- selected terms -->
                         </group>
                     </group>
 
-                    <!-- Gestione TABS-->
+                    <!-- Tabs Management-->
                     <notebook>
-						<page string="Operazioni" name="desc_op" class="fixed-height-page">
+						<page string="Operations" name="desc_op" class="fixed-height-page">
                             <group>
-                                <field name="workoperations" widget="html"/>  <!-- Operazioni Svolte -->
+                                <field name="workoperations" widget="html"/>  <!-- Operations Performed -->
                             </group>
 						</page>
-                        <page string="Credenziali" name="cred_extra" class="fixed-height-page">
+                        <page string="Credentials" name="cred_extra" class="fixed-height-page">
                             <group>
                                 <field name="credential_ids" string=" ">
                                     <list editable="bottom">
@@ -98,7 +98,7 @@
                                 </field>
                             </group>
                         </page>
-                        <page string="Accessori" name="accessory" class="fixed-height-page">
+                        <page string="Accessories" name="accessory" class="fixed-height-page">
                             <group>
                                 <field name="accessory_ids" string=" ">
                                     <list editable="bottom">
@@ -109,20 +109,20 @@
                                 </field>
                             </group>
                         </page>
-                        <page string="Software Da Installare" name="software" class="fixed-height-page">
+                        <page string="Software to Install" name="software" class="fixed-height-page">
                             <group>
                                 <field name="software_line_ids" string=" ">
                                     <list editable="bottom">
                                         <field name="software_id" string="Software"/>
-                                        <field name="software_price" string="Prezzo" readonly="1"/>
-                                        <field name="software_renewal_required" string="Rinnovo Richiesto" readonly="1"/>
-                                        <field name="software_duration" string="Durata" readonly="1" attrs="{'invisible': [('software_id.renewal_required', '=', False)]}"/>
-                                        <field name="add_to_sum" string="Aggiungi al Totale"/>
+                                        <field name="software_price" string="Price" readonly="1"/>
+                                        <field name="software_renewal_required" string="Renewal Required" readonly="1"/>
+                                        <field name="software_duration" string="Duration" readonly="1" attrs="{'invisible': [('software_id.renewal_required', '=', False)]}"/>
+                                        <field name="add_to_sum" string="Add to Total"/>
                                     </list>
                                 </field>
                             </group>
                         </page>
-                        <page string="Componenti / Ricambi" name="compon_used" class="fixed-height-page">
+                        <page string="Components / Parts" name="compon_used" class="fixed-height-page">
                             <group>
                                 <field name="components_ids" string=" ">
                                     <list editable="bottom">
@@ -138,7 +138,7 @@
                                 </field>
                             </group>
 						</page>
-                        <page string="Lab Esterno" name="ext_lab" class="fixed-height-page">
+                        <page string="External Lab" name="ext_lab" class="fixed-height-page">
                             <field name="external_lab_ids" string=" ">
                                 <list editable="bottom">
                                     <field name="lab_id"/>
@@ -147,11 +147,11 @@
                                     <field name="customer_cost"/>
                                     <field name="send_date"/>
                                     <field name="out_date"/>
-                                    <field name="add_to_sum" string="Aggiungi al Totale"/>
+                                    <field name="add_to_sum" string="Add to Total"/>
                                 </list>
                             </field>
                         </page>
-                        <page string="Chat Cliente" name="chat_customer" class="fixed-height-page">
+                        <page string="Customer Chat" name="chat_customer" class="fixed-height-page">
                             <field name="chat_message_ids" string=" ">
                                 <list editable="bottom">
                                         <field name="create_date"/>
@@ -175,7 +175,7 @@
         </field>
     </record>
 
-    <!-- Vista lista (list) delle riparazioni -->
+    <!-- List view of repairs -->
     <record id="view_tech_repair_order_list" model="ir.ui.view">
         <field name="name">tech.repair.order.list</field>
         <field name="model">tech.repair.order</field>
@@ -201,31 +201,31 @@
         <field name="arch" type="xml">
             <search>
                 
-                <field name="name" string="Numero Riparazione"/>
-                <field name="customer_id" string="Cliente"/>
-                <field name="category_id" string="Categoria"/>
-                <field name="brand_id" string="Marca"/>
-                <field name="model_id" string="Modello"/>
-                <field name="state_id" string="Stato Commessa"/>
+                <field name="name" string="Repair Number"/>
+                <field name="customer_id" string="Customer"/>
+                <field name="category_id" string="Category"/>
+                <field name="brand_id" string="Brand"/>
+                <field name="model_id" string="Model"/>
+                <field name="state_id" string="Job Status"/>
 
                 
-                <filter name="filter_open" string="Aperte" domain="[('state_id.is_closed', '=', False)]"/>
-                <filter name="filter_closed" string="Chiuse" domain="[('state_id.is_closed', '=', True)]"/>
+                <filter name="filter_open" string="Open" domain="[('state_id.is_closed', '=', False)]"/>
+                <filter name="filter_closed" string="Closed" domain="[('state_id.is_closed', '=', True)]"/>
                 <separator/>
-                <filter name="filter_assigned" string="Assegnate a me" domain="[('assigned_to', '=', uid)]"/>
-                <filter name="filter_archived" string="Archiviate" domain="[('active', '=', False)]"/>
+                <filter name="filter_assigned" string="Assigned to me" domain="[('assigned_to', '=', uid)]"/>
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
             </search>
         </field>
     </record>
 
     <record id="action_tech_repair_order" model="ir.actions.act_window">
-        <field name="name">Riparazioni</field>
+        <field name="name">Repairs</field>
         <field name="res_model">tech.repair.order</field>
         <field name="type">ir.actions.act_window</field>
         <!-- <field name="view_id" ref="view_tech_repair_order_kanban"/> -->
         <field name="view_mode">list,form</field>
-        <field name="search_view_id" ref="view_repair_order_search"/> <!-- imposto le azioni di ricerca per la list view-->
-        <field name="context">{'search_default_filter_open': 1}</field> <!-- filtro default per le sole commesse aperte (è un array, posso metterne più di uno)-->
+        <field name="search_view_id" ref="view_repair_order_search"/> <!-- set search actions for the list view-->
+        <field name="context">{'search_default_filter_open': 1}</field> <!-- default filter for open jobs only (it's an array, I can put more than one)-->
     </record>
 
     

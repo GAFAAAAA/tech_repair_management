@@ -10,94 +10,94 @@ from odoo.tools import config
 from odoo.exceptions import ValidationError, UserError
 from datetime import timedelta
 
-# Modello principale per la gestione delle riparazioni
+# Main model for repair management
 class RepairOrder(models.Model):
     _name = 'tech.repair.order'
-    _inherit = ['mail.thread', 'mail.activity.mixin']  # Attiva il tracking
-    _description = 'Gestione Riparazioni'
-    _order = 'create_date desc'  # Ordina per data di creazione (dal più recente)
+    _inherit = ['mail.thread', 'mail.activity.mixin']  # Enable tracking
+    _description = 'Repair Management'
+    _order = 'create_date desc'  # Sort by creation date (most recent first)
     _logger = logging.getLogger(__name__)
     
-    # Numero univoco della riparazione, generato automaticamente
-    name = fields.Char(string='Numero Riparazione', required=True, copy=False, default=lambda self: self._generate_sequence())
+    # Unique repair number, automatically generated
+    name = fields.Char(string='Repair Number', required=True, copy=False, default=lambda self: self._generate_sequence())
 
     # Token
     token_url = fields.Char(string='Token URL', copy=False, readonly=True)
 
 
-    # Cliente associato alla riparazione
-    customer_id = fields.Many2one('res.partner', string='Cliente', required=True, context={'from_tech_repair_order': True})
-    customer_mobile = fields.Char(string="Cell", related="customer_id.mobile", store=True)
+    # Customer associated with the repair
+    customer_id = fields.Many2one('res.partner', string='Customer', required=True, context={'from_tech_repair_order': True})
+    customer_mobile = fields.Char(string="Mobile", related="customer_id.mobile", store=True)
     
-    # categoria -> marca -> modello
-    category_id = fields.Many2one('tech.repair.device.category', string='Categoria', required=True)
-    brand_id = fields.Many2one('tech.repair.device.brand', string='Marca', required=True)
-    model_id = fields.Many2one('tech.repair.device.model', string='Modello', required=True)
-    model_variant = fields.Char(string="Variante")
+    # category -> brand -> model
+    category_id = fields.Many2one('tech.repair.device.category', string='Category', required=True)
+    brand_id = fields.Many2one('tech.repair.device.brand', string='Brand', required=True)
+    model_id = fields.Many2one('tech.repair.device.model', string='Model', required=True)
+    model_variant = fields.Char(string="Variant")
 
     device_color = fields.Many2one(
         'tech.repair.device.color',
-        string="Colore",
-        help="Seleziona il colore del dispositivo",
+        string="Color",
+        help="Select the device color",
         )
 
     aesthetic_condition = fields.Selection([
-        ('new', 'Nuovo'),
-        ('good', 'Buono'),
-        ('used', 'Usato'),
-        ('damaged', 'Danneggiato')
-        ], string='Stato Estetico', default='good')
+        ('new', 'New'),
+        ('good', 'Good'),
+        ('used', 'Used'),
+        ('damaged', 'Damaged')
+        ], string='Aesthetic Condition', default='good')
 
-    # stato complessivo del dispositivo all'accettazione
-    aesthetic_state = fields.Char(string='Difetti Visivi', required=False , help="Se ci sono dei danni/graffi evidenti, scrivili qui")
+    # overall device condition at acceptance
+    aesthetic_state = fields.Char(string='Visual Defects', required=False , help="If there are visible damages/scratches, write them here")
 
-    # seriale / IMEI e con traking registro i cambiamenti
-    serial_number = fields.Char(string='Seriale / IMEI', required=False )
+    # serial / IMEI and with tracking record the changes
+    serial_number = fields.Char(string='Serial / IMEI', required=False )
 
-    # codice sime e password del dispositivo
-    sim_pin = fields.Char(string="PIN SIM")
-    device_password = fields.Char(string="Codice/Password Dispositivo")
+    # SIM code and device password
+    sim_pin = fields.Char(string="SIM PIN")
+    device_password = fields.Char(string="Device Code/Password")
 
-    # eventuali extra user e password
+    # any extra username and password
     credential_ids = fields.One2many(
         'tech.repair.credential', 
         'tech_repair_order_id', 
-        string="Credenziali"
+        string="Credentials"
     )
 
-    # accessori lasciati dal cliente
+    # accessories left by the customer
     accessory_ids = fields.One2many(
         'tech.repair.accessory',
         'tech_repair_order_id', 
-        string="Accessori",
+        string="Accessories",
     )
 
-    # software da installare modulo intermedio
+    # software to install intermediate module
     software_line_ids = fields.One2many(
     'tech.repair.software.line', 
     'repair_order_id', 
-    string='Software Installati'
+    string='Installed Software'
     )
 
-    renewal_softwares = fields.Html(string="Software da rinnovare", compute="_compute_renewal_softwares")
+    renewal_softwares = fields.Html(string="Software to Renew", compute="_compute_renewal_softwares")
 
 
 
-    # Stato Fittizio per la Visualizzazione Online
+    # Fictitious State for Online Display
     customer_state_id = fields.Many2one(
         'tech.repair.state.public', 
-        string="Stato Visibile al Cliente", 
+        string="Customer Visible Status", 
     )
 
-    # Laboratorio esterno a cui può essere inviata la riparazione
+    # External laboratory to which the repair can be sent
     external_lab_ids = fields.One2many(
         'tech.repair.external.lab',
         'tech_repair_order_id',
-        string='Laboratori Esterni'
+        string='External Laboratories'
     )
 
     qr_code = fields.Binary(
-        string="QR Code Cliente",
+        string="Customer QR Code",
         compute="_generate_qr_code",
         store=True
     )
@@ -105,7 +105,7 @@ class RepairOrder(models.Model):
 
 
     qr_code_int = fields.Binary(
-        string="QR Code Interno",
+        string="Internal QR Code",
         compute="_generate_qr_code_int",
         store=True
     )
@@ -113,146 +113,146 @@ class RepairOrder(models.Model):
 
 
 
-    # Tecnico assegnato alla riparazione (solo dipendenti) (automatizzato con default l'utente che carica la riparazione)
-    assigned_to = fields.Many2one('res.users', string='Assegnato a', domain=[('employee', '=', True)], default=lambda self: self.env.user)
+    # Technician assigned to the repair (employees only) (automated with default user loading the repair)
+    assigned_to = fields.Many2one('res.users', string='Assigned to', domain=[('employee', '=', True)], default=lambda self: self.env.user)
 
-    # Tecnico che apre la riparazione (solo dipendenti) (automatizzato con default l'utente che carica la riparazione) (sola lettura)
-    opened_by = fields.Many2one('res.users', string='Aperta da', domain=[('employee', '=', True)], default=lambda self: self.env.user, readonly=True)
+    # Technician who opens the repair (employees only) (automated with default user loading the repair) (read only)
+    opened_by = fields.Many2one('res.users', string='Opened by', domain=[('employee', '=', True)], default=lambda self: self.env.user, readonly=True)
 
 
-    # Trova lo stato con sequence = 1 e lo imposta come predefinito
+    # Find the state with sequence = 1 and set it as default
     def _default_state(self):
         state = self.env['tech.repair.state'].search([], order="sequence asc", limit=1)
-        return state.id if state else None  # Se non trova stati, restituisce None senza errori
+        return state.id if state else None  # If no states found, return None without errors
 
-    # Stato della riparazione, gestito dinamicamente
-    # Imposta lo stato automaticamente alla creazione
+    # Repair state, managed dynamically
+    # Set the state automatically at creation
 
     state_id = fields.Many2one(
         'tech.repair.state',
-         string='Stato', 
+         string='Status', 
          required=True, 
          default=_default_state
         )
 
-    # Descrizione del problema segnalato dal cliente
+    # Description of the problem reported by the customer
     problem_description = fields.Text(
-        string='Descrizione Aggiuntiva Problema',
-        help="Problema dichiarato dal cliente"
+        string='Additional Problem Description',
+        help="Problem declared by the customer"
         )
 
-    # Lavoro da svolgere
+    # Work to be done
     worktype = fields.Many2one(
         'tech.repair.worktype',
-        string="Lavoro da svolgere",
+        string="Work to be Done",
         required=True
     )
 
-    # Operazioni svolte dal tecnico
+    # Operations performed by the technician
     workoperations = fields.Html(
-        string="Operazioni Svolte",
+        string="Operations Performed",
         translate=True,
-        sanitize=False,  # Permette HTML senza restrizioni (può essere utile se vuoi pulsanti o formattazione speciale)
+        sanitize=False,  # Allows HTML without restrictions (can be useful if you want buttons or special formatting)
         sanitize_attributes=False,
-        help="Inserisci le operazioni e usa '/' per i comandi.",
+        help="Enter operations and use '/' for commands.",
         default="""
         <ul class="o_checklist">
-          <li>Controllata Licenza Office</li>
-          <li>Controllata Licenza Antivirus</li>
-          <li>Applicato Bollino</li>
-          <li>Effettuata Pulizia</li>
+          <li>Office License Checked</li>
+          <li>Antivirus License Checked</li>
+          <li>Sticker Applied</li>
+          <li>Cleaning Performed</li>
         </ul><br/>
         """,
         )
 
-    # Costo della riparazione
-    tech_repair_cost = fields.Float(string='Costo Riparazione €', default=0.0)
-    # Acconto versato dal cliente
+    # Repair cost
+    tech_repair_cost = fields.Float(string='Repair Cost €', default=0.0)
+    # Down payment made by the customer
     advance_payment = fields.Float(
-        string='Acconto €', 
+        string='Down Payment €', 
         default=0.0,
-        help="Acconto"
+        help="Down payment"
         )
-    # Sconto
+    # Discount
     discount_amount = fields.Float(
-        string="Sconto €",
-        help="Importo dello sconto da applicare al totale."
+        string="Discount €",
+        help="Discount amount to apply to the total."
     )
 
-    # Calcolo automatico del totale previsto
-    expected_total = fields.Float(string='Totale Previsto €', compute='_compute_expected_total')
-    # Componenti usati per la riparazione, presi dal magazzino
+    # Automatic calculation of expected total
+    expected_total = fields.Float(string='Expected Total €', compute='_compute_expected_total')
+    # Components used for the repair, taken from the warehouse
     components_ids = fields.One2many(
         'tech.repair.component',
         'repair_order_id',
-        string='Componenti Utilizzati'
+        string='Components Used'
     )
 
-    # Dispositivo muletto assegnato temporaneamente al cliente
+    # Loaner device temporarily assigned to the customer
     loaner_device_id = fields.Many2one(
     'tech.repair.loaner_device', 
-    string='Dispositivo Muletto',
-    domain="[('status', '=', 'available')]",  # Mostra solo quelli disponibili
+    string='Loaner Device',
+    domain="[('status', '=', 'available')]",  # Show only available ones
     
     )
 
 
-    # Data di apertura (automaticamente impostata alla creazione)
-    open_date = fields.Datetime(string='Data Apertura', default=lambda self: fields.Datetime.now(), readonly=True)
+    # Opening date (automatically set at creation)
+    open_date = fields.Datetime(string='Opening Date', default=lambda self: fields.Datetime.now(), readonly=True)
 
 
-    # Data di chiusura come campo calcolato
+    # Closing date as computed field
     close_date = fields.Datetime(
-        string='Data Chiusura',
+        string='Closing Date',
         compute='_compute_close_date',
         store=True
     )
 
     last_modified_date = fields.Datetime(
-    string="Ultima Modifica",
+    string="Last Modified",
     readonly=True
     )
 
     stimated_date = fields.Date(
-    string="Data di Riconsegna Stimata",
+    string="Estimated Delivery Date",
     readonly=True,
     compute='_compute_stimated_date'
     )
 
-    renewal_date = fields.Date(string="Data di Rinnovo", compute="_compute_renewal_date", store=True, tracking=True)  # Scadenza della commessa
+    renewal_date = fields.Date(string="Renewal Date", compute="_compute_renewal_date", store=True, tracking=True)  # Job expiration date
 
-    reminder_sent = fields.Boolean(string="Promemoria Inviato", default=False, copy=False) # mail scadende inviate o no
+    reminder_sent = fields.Boolean(string="Reminder Sent", default=False, copy=False) # expiration emails sent or not
 
     chat_message_ids = fields.One2many(
         'tech.repair.chat.message',
         'tech_repair_order_id',
-        string="Messaggi Chat"
+        string="Chat Messages"
     )
 
-    new_message = fields.Text(string="Nuovo Messaggio", store=False)
-    new_message_is_customer = fields.Boolean(string="Visibile al Cliente", store=False, default=False)
+    new_message = fields.Text(string="New Message", store=False)
+    new_message_is_customer = fields.Boolean(string="Visible to Customer", store=False, default=False)
 
-    # Firma digitale del cliente per la conferma della riparazione
-    signature = fields.Binary(string='Firma Cliente')
-    signature_locked = fields.Boolean(string="Firma Bloccata", default=True)
+    # Customer's digital signature for repair confirmation
+    signature = fields.Binary(string='Customer Signature')
+    signature_locked = fields.Boolean(string="Signature Locked", default=True)
 
-    signature_url = fields.Char("Firma Cliente URL", compute="_compute_signature_url", store=True)
+    signature_url = fields.Char("Customer Signature URL", compute="_compute_signature_url", store=True)
 
-    # Trova l'informativa predefinita
+    # Find the default terms
     def _default_term(self):
         term = self.env['tech.repair.term'].search([('predefinita', '=', True)], limit=1)
-        return term.id if term else None  # Se non trova l'informativa, restituisce None senza errori
+        return term.id if term else None  # If no terms found, return None without errors
 
     term_id = fields.Many2one(
         'tech.repair.term',
-        string="Informativa",
-        help="Seleziona l'informativa da allegare alla riparazione.",
+        string="Terms",
+        help="Select the terms to attach to the repair.",
         default=_default_term
     )
 
     company_id = fields.Many2one(
         'res.company',
-        string="Azienda",
+        string="Company",
         required=True,
         default=lambda self: self.env.company
     )
@@ -264,7 +264,7 @@ class RepairOrder(models.Model):
     message_ids = fields.One2many(
         'mail.message', 'res_id',
         domain=lambda self: [('model', '=', self._name)],
-        string='Messaggi del Chatter'
+        string='Chatter Messages'
     )
 
     message_follower_ids = fields.One2many(
@@ -273,78 +273,78 @@ class RepairOrder(models.Model):
         string='Followers'
     )
 
-    active = fields.Boolean(default=True, string="Attivo", help="Se deselezionato, la commessa è archiviata.")
+    active = fields.Boolean(default=True, string="Active", help="If unchecked, the job is archived.")
 
 
 
     # -------------------------- DEF
 
-    @api.model_create_multi # Permette la creazione in batch
+    @api.model_create_multi # Allows batch creation
     def create(self, vals_list):
 
-        # Trova l'informativa predefinita
+        # Find the default terms
         default_term = self.env['tech.repair.term'].search([('predefinita', '=', True)], limit=1)
 
 
         for vals in vals_list:
 
-            # Se il campo 'name' non è presente nei valori, generiamo un numero di riparazione automatico
+            # If the 'name' field is not present in the values, we generate an automatic repair number
             if 'name' not in vals or not vals['name']:
                 vals['name'] = self.env['ir.sequence'].next_by_code('tech.repair.order') or 'New'
 
-            # Genera il token univoco per la riparazione
+            # Generate the unique token for the repair
             if 'token_url' not in vals:
-                vals['token_url'] = str(uuid.uuid4())  # Genera un token casuale
+                vals['token_url'] = str(uuid.uuid4())  # Generate a random token
 
-            # Imposta l'utente che crea la riparazione come assegnatario di default
+            # Set the user creating the repair as default assignee
             if 'assigned_to' not in vals:
                 vals['assigned_to'] = self.env.uid
             
-            # Imposta l'utente che crea la riparazione di default
+            # Set the user creating the repair by default
             if 'opened_by' not in vals:
                 vals['opened_by'] = self.env.uid
 
-            # Imposta la data di apertura alla data e ora attuale
+            # Set the opening date to the current date and time
             vals['open_date'] = fields.Datetime.now()
 
-            # Imposta automaticamente l'informativa predefinita
+            # Automatically set the default terms
             if 'term_id' not in vals or not vals['term_id']:
                 vals['term_id'] = default_term.id if default_term else None
             
-            #self._logger.info("Valori finali per la creazione: %s", vals)
+            #self._logger.info("Final values for creation: %s", vals)
 
         return super().create(vals_list)
         
 
     def write(self, vals):
-        # Registra la data dell'ultima modifica
-        if 'last_modified_date' not in vals:  # Evita un loop infinito aggiornando solo se non è già presente
+        # Record the date of the last modification
+        if 'last_modified_date' not in vals:  # Avoid infinite loop by updating only if not already present
             vals['last_modified_date'] = fields.Datetime.now()
 
         if 'stimated_date' not in vals:
-            print('non esiste!')
+            print('does not exist!')
 
-        # Lista dei campi da escludere al tracciamento
-        excluded_fields = ['signature','last_modified_date']  # Variabile per i campi da escludere
+        # List of fields to exclude from tracking
+        excluded_fields = ['signature','last_modified_date']  # Variable for fields to exclude
 
-        # Ottiene le etichette leggibili dei campi
+        # Get readable field labels
         field_labels = self.fields_get()
         old_expected_totals = {}
         for record in self:
             old_values = {
                 field: record[field] 
                 for field in vals.keys() 
-                if field in record and field not in excluded_fields  # Escludiamo alcuni campi
+                if field in record and field not in excluded_fields  # We exclude some fields
             }
             old_expected_totals[record.id] = record.expected_total
-            old_loaner = record.loaner_device_id  # Salvo il muletto precedente
-            old_credentials = record.credential_ids  # Salvo le credenziali precedenti
-            old_accessories = {acc.id: acc.name for acc in record.accessory_ids} # Salvo gli accessori prima della modifica
-            old_components = record.components_ids # Salvo i componenti prima della mod
-            old_software_lines = {line.id: line.software_id.display_name for line in record.software_line_ids} # Salvo le righe software prima della mod
+            old_loaner = record.loaner_device_id  # Save the previous loaner
+            old_credentials = record.credential_ids  # Save previous credentials
+            old_accessories = {acc.id: acc.name for acc in record.accessory_ids} # Save accessories before modification
+            old_components = record.components_ids # Save components before mod
+            old_software_lines = {line.id: line.software_id.display_name for line in record.software_line_ids} # Save software lines before mod
 
 
-        res = super(RepairOrder, self).write(vals)  # Salvo prima le modifiche senza causare ricorsione
+        res = super(RepairOrder, self).write(vals)  # Save modifications first without causing recursion
 
         for record in self:
             changed_fields = []
@@ -527,22 +527,22 @@ class RepairOrder(models.Model):
 
         return res
 
-    # Impedisce la cancellazione delle commesse, consentendo solo l'archiviazione.
+    # Prevents deletion of jobs, allowing only archiving.
     def unlink(self):
-        raise UserError("Le commesse di riparazione non possono essere eliminate. Puoi solo archiviarle.")
+        raise UserError("Repair jobs cannot be deleted. You can only archive them.")
 
     def action_archive(self):
-    # Archivia la commessa invece di eliminarla.
+    # Archives the job instead of deleting it.
         self.write({'active': False})
 
-    # Metodo per creare un numero di commessa automatico
+    # Method to create an automatic job number
     @api.model
     def _generate_sequence(self):
-        # Genera automaticamente un numero di riparazione univoco
-        return self.env['ir.sequence'].next_by_code('tech.repair.order') or 'Nuova Riparazione'
+        # Automatically generates a unique repair number
+        return self.env['ir.sequence'].next_by_code('tech.repair.order') or 'New Repair'
 
 
-    # Quando un muletto viene assegnato, cambia il suo stato a 'Assegnato'
+    # When a loaner is assigned, change its status to 'Assigned'
     @api.onchange('loaner_device_id')
     def _onchange_loaner_device(self):
         if self.loaner_device_id:
@@ -739,10 +739,10 @@ class RepairOrder(models.Model):
 
         for record in self:
             if not record.renewal_date:
-                raise UserError("Nessuna data di rinnovo impostata.")
+                raise UserError("No renewal date set.")
 
             if not record.customer_id.email:
-                raise UserError(f"Il cliente {record.customer_id.name} non ha un'email impostata!")
+                raise UserError(f"Customer {record.customer_id.name} does not have an email set!")
 
             if mail_template:
 

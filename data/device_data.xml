@@ -1,5 +1,5 @@
 <odoo>
-    <!-- Categorie di dispositivi -->
+    <!-- Device categories -->
     <record id="category_smartphone" model="tech.repair.device.category">
         <field name="name">Smartphone</field>
     </record>
@@ -10,22 +10,22 @@
         <field name="name">Notebook</field>
     </record>
     <record id="category_tower" model="tech.repair.device.category">
-        <field name="name">PC Fisso</field>
+        <field name="name">Desktop PC</field>
     </record>
     <record id="category_camera" model="tech.repair.device.category">
-        <field name="name">Fotocamera</field>
+        <field name="name">Camera</field>
     </record>
     <record id="category_hdd" model="tech.repair.device.category">
         <field name="name">Hard Disk</field>
     </record>
     <record id="category_pdrive" model="tech.repair.device.category">
-        <field name="name">PenDrive</field>
+        <field name="name">USB Drive</field>
     </record>
     <record id="category_printer" model="tech.repair.device.category">
-        <field name="name">Stampante</field>
+        <field name="name">Printer</field>
     </record>
     <record id="category_sd" model="tech.repair.device.category">
-        <field name="name">Scheda SD</field>
+        <field name="name">SD Card</field>
     </record>
     <record id="category_watch" model="tech.repair.device.category">
         <field name="name">Watch</field>
@@ -36,7 +36,7 @@
 
 
 
-    <!-- ********* Marche *********** -->
+    <!-- ********* Brands *********** -->
     
     <!-- Apple -->
     <record id="brand_apple" model="tech.repair.device.brand">
@@ -125,7 +125,7 @@
 
 
 
-<!-- ********* Modelli *********** -->
+<!-- ********* Models *********** -->
 
     <!-- Apple Notebook -->
     <record id="model_macbook_air" model="tech.repair.device.model">
