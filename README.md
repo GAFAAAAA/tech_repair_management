@@ -2,10 +2,34 @@
 
 Overview
 
-The Repair Management Module for Odoo 18 is designed to facilitate the tracking, management, and processing of repair orders. This module helps businesses streamline their repair workflows, track customer requests, and manage external laboratories, accessories, and credentials efficiently.
+The Repair Management Module for Odoo 18 is designed to facilitate the tracking, management, and processing of repair orders. This module helps businesses streamline their repair workflows, track customer requests, manage device inventory, and handle multiple devices per repair order efficiently.
 
 
 **Features**
+
+- **Device Inventory System**
+
+Check-in customer devices into inventory with full tracking capabilities.
+
+Track devices by category, brand, model, variant, and serial number.
+
+Monitor device status (Available, In Repair, Returned to Customer).
+
+Automatically link inventory items to repair orders.
+
+Unique serial number validation per device configuration.
+
+
+- **Multiple Devices per Repair Order**
+
+Support for multiple devices in a single repair order.
+
+Each device line includes category, brand, model, variant, and serial number.
+
+Serial number dropdown automatically filters based on selected device configuration.
+
+Display device summary and count in repair order list view.
+
 
 - **Repair Order Management**
 
