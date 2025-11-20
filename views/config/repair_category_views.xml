@@ -26,7 +26,7 @@
     </record>
 
     <record id="action_tech_repair_category" model="ir.actions.act_window">
-        <field name="name">Categorie Dispositivi</field>
+        <field name="name">Product Categories</field>
         <field name="res_model">tech.repair.category</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">list,form</field>
