@@ -36,6 +36,7 @@
         'data/repair_order_sequence.xml',
         'data/repair_worktype_data.xml',
         'data/device_data.xml',
+        'data/inventory_sample_data.xml',
         'data/repair_term.xml',
         'data/email_template_repair_renewal.xml',
         'data/cron_job.xml',

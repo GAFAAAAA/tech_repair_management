@@ -216,9 +216,8 @@
             <list>
                 <field name="name"/>
                 <field name="customer_id"/>
-                <field name="category_id"/>
-                <field name="brand_id"/>
-                <field name="model_id"/>
+                <field name="device_summary"/>
+                <field name="device_count" string="# Devices"/>
                 <field name="state_id"/>
                 <field name="expected_total"/>
                 <field name="open_date" readonly="1"/>
@@ -235,6 +234,7 @@
                 
                 <field name="name" string="Repair Number"/>
                 <field name="customer_id" string="Customer"/>
+                <field name="device_ids" string="Device Serial Number" filter_domain="[('device_ids.serial_number', 'ilike', self)]"/>
                 <field name="category_id" string="Category"/>
                 <field name="brand_id" string="Brand"/>
                 <field name="model_id" string="Model"/>

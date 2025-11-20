@@ -30,6 +30,8 @@ class RepairOrder(models.Model):
     
     # Multiple devices support
     device_ids = fields.One2many('tech.repair.order.device', 'repair_order_id', string='Devices')
+    device_count = fields.Integer(string='Device Count', compute='_compute_device_count', store=True)
+    device_summary = fields.Char(string='Devices', compute='_compute_device_summary', store=True)
     
     # Legacy fields for backward compatibility (deprecated - use device_ids instead)
     # These fields are no longer required to support orders with only device_ids
@@ -286,6 +288,32 @@ class RepairOrder(models.Model):
             has_legacy = bool(record.category_id and record.brand_id and record.model_id)
             if not has_devices and not has_legacy:
                 raise ValidationError("Please add at least one device or fill in the device information fields.")
+
+    @api.depends('device_ids')
+    def _compute_device_count(self):
+        """Compute the number of devices in the repair order"""
+        for record in self:
+            record.device_count = len(record.device_ids)
+
+    @api.depends('device_ids', 'device_ids.name', 'category_id', 'brand_id', 'model_id', 'model_variant')
+    def _compute_device_summary(self):
+        """Generate a summary of devices for display in list view"""
+        for record in self:
+            if record.device_ids:
+                # Use device lines
+                device_names = [device.name for device in record.device_ids]
+                if len(device_names) > 2:
+                    record.device_summary = f"{', '.join(device_names[:2])} (+{len(device_names) - 2} more)"
+                else:
+                    record.device_summary = ', '.join(device_names)
+            elif record.category_id and record.brand_id and record.model_id:
+                # Use legacy fields
+                parts = [record.category_id.name, record.brand_id.name, record.model_id.name]
+                if record.model_variant:
+                    parts.append(record.model_variant)
+                record.device_summary = ' '.join(parts)
+            else:
+                record.device_summary = 'No devices'
 
     # -------------------------- DEF
 
