@@ -28,10 +28,14 @@ class RepairOrder(models.Model):
     # Customer associated with the repair
     customer_id = fields.Many2one('res.partner', string='Customer', required=True, context={'from_tech_repair_order': True})
     
-    # category -> brand -> model
-    category_id = fields.Many2one('tech.repair.device.category', string='Category', required=True)
-    brand_id = fields.Many2one('tech.repair.device.brand', string='Brand', required=True)
-    model_id = fields.Many2one('tech.repair.device.model', string='Model', required=True)
+    # Multiple devices support
+    device_ids = fields.One2many('tech.repair.order.device', 'repair_order_id', string='Devices')
+    
+    # Legacy fields for backward compatibility (deprecated - use device_ids instead)
+    # These fields are no longer required to support orders with only device_ids
+    category_id = fields.Many2one('tech.repair.device.category', string='Category', required=False)
+    brand_id = fields.Many2one('tech.repair.device.brand', string='Brand', required=False)
+    model_id = fields.Many2one('tech.repair.device.model', string='Model', required=False)
     model_variant = fields.Char(string="Variant")
 
     device_color = fields.Many2one(
@@ -274,7 +278,14 @@ class RepairOrder(models.Model):
 
     active = fields.Boolean(default=True, string="Active", help="If unchecked, the job is archived.")
 
-
+    @api.constrains('device_ids', 'category_id', 'brand_id', 'model_id')
+    def _check_devices(self):
+        """Ensure either device_ids or legacy device fields are filled"""
+        for record in self:
+            has_devices = bool(record.device_ids)
+            has_legacy = bool(record.category_id and record.brand_id and record.model_id)
+            if not has_devices and not has_legacy:
+                raise ValidationError("Please add at least one device or fill in the device information fields.")
 
     # -------------------------- DEF
 
