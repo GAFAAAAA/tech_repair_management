@@ -24,18 +24,16 @@
                             </div>
                         </div>       
                     </div>
+                    
+                    <!-- Quick Inventory Check-in Section -->
+                    <group string="Quick Device Check-in" name="quick_checkin">
+                        <button name="%(action_tech_repair_inventory)d" type="action" string="Check-in Device to Inventory" class="btn-primary" icon="fa-plus-circle"/>
+                    </group>
+                    
                     <group>
                         <group>
                             <field name="name" readonly="1"/>  <!-- Repair Number (Automatically Generated) -->
                             <field name="customer_id" placeholder="Customer" context="{'from_tech_repair_order': True}"/> <!-- Customer options="{'no_create': True}"-->
-                            <field name="category_id" placeholder="Category" required="1"/>  <!-- Category -->
-                            <field name="brand_id" placeholder="Brand" required="1"/>  <!-- Brand domain="[('category_id', '=', category_id)]"-->
-                            <field name="model_id" placeholder="Model" required="1" domain="[('brand_id', '=', brand_id)]"/>  <!-- Model -->
-                            <field name="model_variant" placeholder="e.g. Pro Max"/> <!-- variant -->
-                            <field name="device_color" placeholder="Color" widget="many2one_tags"/> <!-- Color -->
-                            <field name="aesthetic_condition"/> <!-- Aesthetic Conditions -->
-                            <field name="aesthetic_state" placeholder="e.g. Scratches on body"/> 
-                            <field name="serial_number" placeholder="0123456789"/>  <!-- Serial Number -->
                             <field name="worktype"/>
                             <field name="problem_description" placeholder="e.g. Touch not working"/>  <!-- Problem Description -->
                             <field name="sim_pin" placeholder="0000"/>
@@ -55,6 +53,41 @@
                             <field name="discount_amount"/>  <!-- Discount -->
                             <field name="expected_total" readonly="1"/>  <!-- Expected Total -->
                             <field name="loaner_device_id" domain="[('status', '=', 'available')]"/> <!-- Loaner -->
+                        </group>
+                    </group>
+                    
+                    <!-- Multiple Devices Section -->
+                    <group string="Devices" name="devices_section">
+                        <field name="device_ids" nolabel="1" context="{'default_repair_order_id': id}">
+                            <list editable="bottom">
+                                <field name="sequence" widget="handle"/>
+                                <field name="category_id" required="1"/>
+                                <field name="brand_id" required="1"/>
+                                <field name="model_id" required="1" domain="[('brand_id', '=', brand_id)]"/>
+                                <field name="model_variant"/>
+                                <field name="inventory_id" required="1" 
+                                       domain="[('category_id', '=', category_id), ('brand_id', '=', brand_id), ('model_id', '=', model_id), ('model_variant', '=', model_variant), ('status', '=', 'available')]"
+                                       options="{'no_create': True, 'no_open': True}"/>
+                                <field name="serial_number"/>
+                                <field name="device_color"/>
+                                <field name="aesthetic_condition"/>
+                            </list>
+                        </field>
+                    </group>
+                    
+                    <!-- Legacy Single Device Fields (For Backward Compatibility) -->
+                    <group string="Legacy Device Info (Deprecated - Use Devices section above)" name="legacy_device" attrs="{'invisible': [('device_ids', '!=', [])]}">
+                        <group>
+                            <field name="category_id" placeholder="Category"/>  <!-- Category -->
+                            <field name="brand_id" placeholder="Brand"/>  <!-- Brand -->
+                            <field name="model_id" placeholder="Model" domain="[('brand_id', '=', brand_id)]"/>  <!-- Model -->
+                            <field name="model_variant" placeholder="e.g. Pro Max"/> <!-- variant -->
+                        </group>
+                        <group>
+                            <field name="device_color" placeholder="Color" widget="many2one_tags"/> <!-- Color -->
+                            <field name="aesthetic_condition"/> <!-- Aesthetic Conditions -->
+                            <field name="aesthetic_state" placeholder="e.g. Scratches on body"/> 
+                            <field name="serial_number" placeholder="0123456789"/>  <!-- Serial Number -->
                         </group>
                     </group>
 
@@ -183,9 +216,8 @@
             <list>
                 <field name="name"/>
                 <field name="customer_id"/>
-                <field name="category_id"/>
-                <field name="brand_id"/>
-                <field name="model_id"/>
+                <field name="device_summary"/>
+                <field name="device_count" string="# Devices"/>
                 <field name="state_id"/>
                 <field name="expected_total"/>
                 <field name="open_date" readonly="1"/>
@@ -202,6 +234,7 @@
                 
                 <field name="name" string="Repair Number"/>
                 <field name="customer_id" string="Customer"/>
+                <field name="device_ids" string="Device Serial Number" filter_domain="[('device_ids.serial_number', 'ilike', self)]"/>
                 <field name="category_id" string="Category"/>
                 <field name="brand_id" string="Brand"/>
                 <field name="model_id" string="Model"/>

@@ -1,5 +1,7 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
 access_tech_repair_order,access.tech.repair.order,model_tech_repair_order,,1,1,1,1
+access_tech_repair_inventory,access.tech.repair.inventory,model_tech_repair_inventory,,1,1,1,1
+access_tech_repair_order_device,access.tech.repair.order.device,model_tech_repair_order_device,,1,1,1,1
 access_tech_repair_loaner_device,access.tech.repair.loaner.device,model_tech_repair_loaner_device,,1,1,1,1
 access_tech_repair_state,access.tech.repair.state,model_tech_repair_state,,1,1,1,1
 access_tech_repair_category,access.tech.repair.category,model_tech_repair_category,,1,1,1,1

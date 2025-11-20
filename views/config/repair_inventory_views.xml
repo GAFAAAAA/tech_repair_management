@@ -1,0 +1,98 @@
+<odoo>
+    <!-- Inventory Form View -->
+    <record id="view_tech_repair_inventory_form" model="ir.ui.view">
+        <field name="name">tech.repair.inventory.form</field>
+        <field name="model">tech.repair.inventory</field>
+        <field name="arch" type="xml">
+            <form string="Device Inventory">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="category_id" placeholder="Category" required="1"/>
+                            <field name="brand_id" placeholder="Brand" required="1"/>
+                            <field name="model_id" placeholder="Model" required="1" domain="[('brand_id', '=', brand_id)]"/>
+                            <field name="model_variant" placeholder="e.g., Pro Max, 14x4.3"/>
+                            <field name="serial_number" placeholder="Serial Number" required="1"/>
+                        </group>
+                        <group>
+                            <field name="status"/>
+                            <field name="repair_order_id" readonly="1" attrs="{'invisible': [('repair_order_id', '=', False)]}"/>
+                            <field name="check_in_date" readonly="1"/>
+                            <field name="checked_in_by" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="notes" placeholder="Additional notes about this device..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Inventory List View -->
+    <record id="view_tech_repair_inventory_list" model="ir.ui.view">
+        <field name="name">tech.repair.inventory.list</field>
+        <field name="model">tech.repair.inventory</field>
+        <field name="arch" type="xml">
+            <list string="Device Inventory">
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="brand_id"/>
+                <field name="model_id"/>
+                <field name="model_variant"/>
+                <field name="serial_number"/>
+                <field name="status" decoration-success="status == 'available'" decoration-warning="status == 'in_repair'" decoration-muted="status == 'returned'"/>
+                <field name="repair_order_id"/>
+                <field name="check_in_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Inventory Search View -->
+    <record id="view_tech_repair_inventory_search" model="ir.ui.view">
+        <field name="name">tech.repair.inventory.search</field>
+        <field name="model">tech.repair.inventory</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="serial_number"/>
+                <field name="category_id"/>
+                <field name="brand_id"/>
+                <field name="model_id"/>
+                <field name="model_variant"/>
+                <separator/>
+                <filter name="filter_available" string="Available" domain="[('status', '=', 'available')]"/>
+                <filter name="filter_in_repair" string="In Repair" domain="[('status', '=', 'in_repair')]"/>
+                <filter name="filter_returned" string="Returned" domain="[('status', '=', 'returned')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
+                    <filter name="group_brand" string="Brand" context="{'group_by': 'brand_id'}"/>
+                    <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Inventory Action -->
+    <record id="action_tech_repair_inventory" model="ir.actions.act_window">
+        <field name="name">Device Inventory</field>
+        <field name="res_model">tech.repair.inventory</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_tech_repair_inventory_search"/>
+        <field name="context">{'search_default_filter_available': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add devices to inventory
+            </p>
+            <p>
+                Check in customer devices by recording their category, brand, model, variant, and serial number.
+            </p>
+        </field>
+    </record>
+</odoo>
