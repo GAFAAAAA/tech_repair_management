@@ -23,8 +23,8 @@ class RepairDeviceModel(models.Model):
     category_id = fields.Many2one('tech.repair.device.category', string='Category', required=True)
 
 class RepairDeviceModelVariant(models.Model):
-    _name = 'tech.repair.device.model.variant'
-    _description = 'Repair Device Model Variant'
+    _name = 'tech.repair.device.variant'
+    _description = 'Repair Device Variant'
 
     name = fields.Char(string='Variant', required=True)
     model_id = fields.Many2one('tech.repair.device.model', string='Device Model', required=True)
