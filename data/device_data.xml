@@ -23,7 +23,16 @@
     <field name="category_id" ref="category_camera"/>
   </record>
 
+  <!-- Canon Lens Models -->
+  <record id="model_canon_ef_zoom" model="tech.repair.device.model">
+    <field name="name">EF ZOOM</field>
+    <field name="brand_id" ref="brand_canon"/>
+    <field name="category_id" ref="category_lens"/>
+  </record>
+
   <!-- ********* Variants *********** -->
+  
+  <!-- Canon Camera Variants -->
   <record id="variant_canon_eos_5d_mkiii" model="tech.repair.device.variant">
     <field name="name">Mark III</field>
     <field name="model_id" ref="model_canon_eos_5d"/>
@@ -32,6 +41,17 @@
   <record id="variant_canon_eos_5d_mkiv" model="tech.repair.device.variant">
     <field name="name">Mark IV</field>
     <field name="model_id" ref="model_canon_eos_5d"/>
+  </record>
+
+  <!-- Canon Lens Variants -->
+  <record id="variant_canon_ef_zoom_70_300" model="tech.repair.device.variant">
+    <field name="name">EF 70-300mm f/4-5.6L IS USM</field>
+    <field name="model_id" ref="model_canon_ef_zoom"/>
+  </record>
+  
+  <record id="variant_canon_ef_zoom_24_70" model="tech.repair.device.variant">
+    <field name="name">EF 24-70mm f/2.8L II USM</field>
+    <field name="model_id" ref="model_canon_ef_zoom"/>
   </record>
 
 </odoo>

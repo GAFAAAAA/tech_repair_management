@@ -4,6 +4,7 @@
         <field name="model">tech.repair.device.variant</field>
         <field name="arch" type="xml">
             <list>
+                <field name="model_id"/>
                 <field name="name"/>
             </list>
         </field>
@@ -16,6 +17,7 @@
             <form>
                 <sheet>
                     <group>
+                        <field name="model_id"/>
                         <field name="name"/>
                     </group>
                 </sheet>
