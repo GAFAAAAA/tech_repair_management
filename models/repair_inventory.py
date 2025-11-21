@@ -52,14 +52,14 @@ class RepairInventory(models.Model):
             return {
                 'domain': {
                     'brand_id': [('id', 'in', brand_ids)],
-                    'model_id': [('id', '=', False)],
+                    'model_id': [('category_id', '=', self.category_id.id)],
                     'variant_id': [('id', '=', False)],
                 }
             }
         return {
             'domain': {
                 'brand_id': [],
-                'model_id': [('id', '=', False)],
+                'model_id': [],
                 'variant_id': [('id', '=', False)],
             }
         }
