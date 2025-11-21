@@ -1,208 +1,135 @@
 <odoo>
-    <!-- Device categories -->
-    <record id="category_smartphone" model="tech.repair.device.category">
-        <field name="name">Smartphone</field>
-    </record>
-    <record id="category_tablet" model="tech.repair.device.category">
-        <field name="name">Tablet</field>
-    </record>
-    <record id="category_notebook" model="tech.repair.device.category">
-        <field name="name">Notebook</field>
-    </record>
-    <record id="category_tower" model="tech.repair.device.category">
-        <field name="name">Desktop PC</field>
-    </record>
-    <record id="category_camera" model="tech.repair.device.category">
-        <field name="name">Camera</field>
-    </record>
-    <record id="category_hdd" model="tech.repair.device.category">
-        <field name="name">Hard Disk</field>
-    </record>
-    <record id="category_pdrive" model="tech.repair.device.category">
-        <field name="name">USB Drive</field>
-    </record>
-    <record id="category_printer" model="tech.repair.device.category">
-        <field name="name">Printer</field>
-    </record>
-    <record id="category_sd" model="tech.repair.device.category">
-        <field name="name">SD Card</field>
-    </record>
-    <record id="category_watch" model="tech.repair.device.category">
-        <field name="name">Watch</field>
-    </record>
-    <record id="category_console" model="tech.repair.device.category">
-        <field name="name">Console</field>
-    </record>
+  <!-- Device categories -->
+  <record id="category_lens" model="tech.repair.device.category">
+    <field name="name">Lens</field>
+  </record>
+  <record id="category_camera" model="tech.repair.device.category">
+    <field name="name">Camera</field>
+  </record>
 
+  <!-- ********* Brands for Camera and Lens *********** -->
 
+  <!-- Canon -->
+  <record id="brand_canon" model="tech.repair.device.brand">
+    <field name="name">Canon</field>
+  </record>
 
-    <!-- ********* Brands *********** -->
-    
-    <!-- Apple -->
-    <record id="brand_apple" model="tech.repair.device.brand">
-        <field name="name">Apple</field>
-        
-    </record>
+  <!-- Nikon -->
+  <record id="brand_nikon" model="tech.repair.device.brand">
+    <field name="name">Nikon</field>
+  </record>
 
-    <record id="brand_apple" model="tech.repair.device.brand">
-        <field name="name">Apple</field>
-        
-    </record>
+  <!-- Sony -->
+  <record id="brand_sony" model="tech.repair.device.brand">
+    <field name="name">Sony</field>
+  </record>
 
-    <!-- Samsung -->
-    <record id="brand_samsung" model="tech.repair.device.brand">
-        <field name="name">Samsung</field>
-        
-    </record>
+  <!-- Fujifilm -->
+  <record id="brand_fujifilm" model="tech.repair.device.brand">
+    <field name="name">Fujifilm</field>
+  </record>
 
-    <!-- Dell -->
-    <record id="brand_dell" model="tech.repair.device.brand">
-        <field name="name">Dell</field>
-        
-    </record>
+  <!-- Panasonic -->
+  <record id="brand_panasonic" model="tech.repair.device.brand">
+    <field name="name">Panasonic</field>
+  </record>
 
-    <!-- HP -->
-    <record id="brand_hp" model="tech.repair.device.brand">
-        <field name="name">HP</field>
-        
-    </record>
+  <!-- Olympus -->
+  <record id="brand_olympus" model="tech.repair.device.brand">
+    <field name="name">Olympus</field>
+  </record>
 
-    <!-- Lenovo -->
-    <record id="brand_lenovo" model="tech.repair.device.brand">
-        <field name="name">Lenovo</field>
-        
-    </record>
+  <!-- Sigma -->
+  <record id="brand_sigma" model="tech.repair.device.brand">
+    <field name="name">Sigma</field>
+  </record>
 
-    <!-- Asus -->
-    <record id="brand_asus" model="tech.repair.device.brand">
-        <field name="name">Asus</field>
-        
-    </record>
+  <!-- Tamron -->
+  <record id="brand_tamron" model="tech.repair.device.brand">
+    <field name="name">Tamron</field>
+  </record>
 
-    <!-- Acer -->
-    <record id="brand_acer" model="tech.repair.device.brand">
-        <field name="name">Acer</field>
-        
-    </record>
+  <!-- ********* Models (Camera and Lens) *********** -->
 
-    <!-- Sony -->
-    <record id="brand_sony" model="tech.repair.device.brand">
-        <field name="name">Sony</field>
-        
-    </record>
+  <!-- Canon Camera Models -->
+  <record id="model_canon_eos_r5" model="tech.repair.device.model">
+    <field name="name">EOS R5</field>
+    <field name="brand_id" ref="brand_canon"/>
+    <field name="category_id" ref="category_camera"/>
+  </record>
+  <record id="model_canon_eos_90d" model="tech.repair.device.model">
+    <field name="name">EOS 90D</field>
+    <field name="brand_id" ref="brand_canon"/>
+    <field name="category_id" ref="category_camera"/>
+  </record>
 
-    <!-- Microsoft -->
-    <record id="brand_microsoft" model="tech.repair.device.brand">
-        <field name="name">Microsoft</field>
-        
-    </record>
+  <!-- Canon Lens Models -->
+  <record id="model_canon_rf_24_70" model="tech.repair.device.model">
+    <field name="name">RF 24-70mm F2.8L IS USM</field>
+    <field name="brand_id" ref="brand_canon"/>
+    <field name="category_id" ref="category_lens"/>
+  </record>
 
-    <!-- Xiaomi -->
-    <record id="brand_xiaomi" model="tech.repair.device.brand">
-        <field name="name">Xiaomi</field>
-        
-    </record>
+  <!-- Nikon Camera Models -->
+  <record id="model_nikon_z7ii" model="tech.repair.device.model">
+    <field name="name">Z 7II</field>
+    <field name="brand_id" ref="brand_nikon"/>
+    <field name="category_id" ref="category_camera"/>
+  </record>
 
-    <!-- LG -->
-    <record id="brand_lg" model="tech.repair.device.brand">
-        <field name="name">LG</field>
-        
-    </record>
+  <!-- Nikon Lens Models -->
+  <record id="model_nikon_z_24_70" model="tech.repair.device.model">
+    <field name="name">NIKKOR Z 24-70mm f/2.8 S</field>
+    <field name="brand_id" ref="brand_nikon"/>
+    <field name="category_id" ref="category_lens"/>
+  </record>
 
-    <!-- Huawei -->
-    <record id="brand_huawei" model="tech.repair.device.brand">
-        <field name="name">Huawei</field>
-        
-    </record>
+  <!-- Sony Camera Models -->
+  <record id="model_sony_a7_iv" model="tech.repair.device.model">
+    <field name="name">Alpha 7 IV</field>
+    <field name="brand_id" ref="brand_sony"/>
+    <field name="category_id" ref="category_camera"/>
+  </record>
 
-    <!-- Google -->
-    <record id="brand_google" model="tech.repair.device.brand">
-        <field name="name">Google</field>
-        
-    </record>
+  <!-- Sony Lens Models -->
+  <record id="model_sony_fe_24_70" model="tech.repair.device.model">
+    <field name="name">FE 24-70mm F2.8 GM</field>
+    <field name="brand_id" ref="brand_sony"/>
+    <field name="category_id" ref="category_lens"/>
+  </record>
 
+  <!-- Fujifilm Camera Models -->
+  <record id="model_fujifilm_x_t5" model="tech.repair.device.model">
+    <field name="name">X-T5</field>
+    <field name="brand_id" ref="brand_fujifilm"/>
+    <field name="category_id" ref="category_camera"/>
+  </record>
 
+  <!-- Panasonic Camera Models -->
+  <record id="model_panasonic_s5ii" model="tech.repair.device.model">
+    <field name="name">Lumix S5II</field>
+    <field name="brand_id" ref="brand_panasonic"/>
+    <field name="category_id" ref="category_camera"/>
+  </record>
 
+  <!-- Olympus Camera Models -->
+  <record id="model_olympus_omd_em1" model="tech.repair.device.model">
+    <field name="name">OM-D E-M1 Mark III</field>
+    <field name="brand_id" ref="brand_olympus"/>
+    <field name="category_id" ref="category_camera"/>
+  </record>
 
+  <!-- Sigma Lens Models -->
+  <record id="model_sigma_24_70" model="tech.repair.device.model">
+    <field name="name">24-70mm F2.8 DG DN Art</field>
+    <field name="brand_id" ref="brand_sigma"/>
+    <field name="category_id" ref="category_lens"/>
+  </record>
 
-<!-- ********* Models *********** -->
-
-    <!-- Apple Notebook -->
-    <record id="model_macbook_air" model="tech.repair.device.model">
-        <field name="name">MacBook Air</field>
-        <field name="brand_id" ref="brand_apple"/>
-    </record>
-    <record id="model_macbook_pro" model="tech.repair.device.model">
-        <field name="name">MacBook Pro</field>
-        <field name="brand_id" ref="brand_apple"/>
-    </record>
-
-    <!-- Apple Smartphone -->
-    <record id="model_iphone_13" model="tech.repair.device.model">
-        <field name="name">iPhone 13</field>
-        <field name="brand_id" ref="brand_apple"/> 
-    </record>
-    <record id="model_iphone_14" model="tech.repair.device.model">
-        <field name="name">iPhone 14</field>
-        <field name="brand_id" ref="brand_apple"/>
-    </record>
-    <record id="model_iphone_15" model="tech.repair.device.model">
-        <field name="name">iPhone 15</field>
-        <field name="brand_id" ref="brand_apple"/>
-    </record>
-    <record id="model_iphone_16" model="tech.repair.device.model">
-        <field name="name">iPhone 16</field>
-        <field name="brand_id" ref="brand_apple"/>
-    </record>
-
-
-
-
-
-
-    <!-- Samsung Smartphone -->
-    <record id="model_galaxy_s21" model="tech.repair.device.model">
-        <field name="name">Galaxy S21</field>
-        <field name="brand_id" ref="brand_samsung"/>
-    </record>
-    <record id="model_galaxy_s22" model="tech.repair.device.model">
-        <field name="name">Galaxy S22</field>
-        <field name="brand_id" ref="brand_samsung"/>
-    </record>
-
-
-
-
-    <!-- Dell Notebook -->
-    <record id="model_dell_xps_15" model="tech.repair.device.model">
-        <field name="name">XPS 15</field>
-        <field name="brand_id" ref="brand_dell"/>
-    </record>
-
-
-    <!-- HP Notebook -->
-    <record id="model_hp_spectre" model="tech.repair.device.model">
-        <field name="name">Spectre x360</field>
-        <field name="brand_id" ref="brand_hp"/>
-    </record>
-
-
-    <!-- Lenovo Notebook -->
-    <record id="model_lenovo_thinkpad" model="tech.repair.device.model">
-        <field name="name">ThinkPad X1 Carbon</field>
-        <field name="brand_id" ref="brand_lenovo"/>
-    </record>
-
-    <!-- Sony Console -->
-    <record id="model_ps5" model="tech.repair.device.model">
-        <field name="name">PlayStation 5</field>
-        <field name="brand_id" ref="brand_sony"/>
-    </record>
-
-    <!-- Microsoft Console -->
-    <record id="model_xbox_series_x" model="tech.repair.device.model">
-        <field name="name">Xbox Series X</field>
-        <field name="brand_id" ref="brand_microsoft"/>
-    </record>
-
+  <!-- Tamron Lens Models -->
+  <record id="model_tamron_28_75" model="tech.repair.device.model">
+    <field name="name">28-75mm F2.8 Di III VXD G2</field>
+    <field name="brand_id" ref="brand_tamron"/>
+    <field name="category_id" ref="category_lens"/>
+  </record>
 </odoo>
