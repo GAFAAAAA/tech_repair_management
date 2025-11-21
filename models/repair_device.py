@@ -20,3 +20,4 @@ class RepairDeviceModel(models.Model):
 
     name = fields.Char(string='Model', required=True)
     brand_id = fields.Many2one('tech.repair.device.brand', string='Brand', required=True)
+    category_id = fields.Many2one('tech.repair.device.category', string='Category', required=True)
