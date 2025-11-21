@@ -54,29 +54,25 @@
     </record>
 
     <!-- Inventory Search View -->
-    <record id="view_tech_repair_inventory_search" model="ir.ui.view">
-        <field name="name">tech.repair.inventory.search</field>
-        <field name="model">tech.repair.inventory</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="serial_number"/>
-                <field name="category_id"/>
-                <field name="brand_id"/>
-                <field name="model_id"/>
-                <field name="model_variant"/>
-                <separator/>
-                <filter name="filter_available" string="Available" domain="[('status', '=', 'available')]"/>
-                <filter name="filter_in_repair" string="In Repair" domain="[('status', '=', 'in_repair')]"/>
-                <filter name="filter_returned" string="Returned" domain="[('status', '=', 'returned')]"/>
-                <separator/>
-                <group expand="0" string="Group By">
-                    <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
-                    <filter name="group_brand" string="Brand" context="{'group_by': 'brand_id'}"/>
-                    <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
+  <record id="view_tech_repair_inventory_search" model="ir.ui.view">
+    <field name="name">tech.repair.inventory.search</field>
+    <field name="model">tech.repair.inventory</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="serial_number"/>
+        <field name="category_id"/>
+        <field name="brand_id"/>
+        <field name="model_id"/>
+        <field name="model_variant"/>
+        <filter name="filter_available" string="Available" domain="[('status', '=', 'available')]"/>
+        <filter name="filter_in_repair" string="In Repair" domain="[('status', '=', 'in_repair')]"/>
+        <filter name="filter_returned" string="Returned" domain="[('status', '=', 'returned')]"/>
+        <filter name="group_category" string="Category" context="{'group_by': 'category_id'}" />
+        <filter name="group_brand" string="Brand" context="{'group_by': 'brand_id'}" />
+        <filter name="group_status" string="Status" context="{'group_by': 'status'}" />
+      </search>
+    </field>
+  </record>
 
     <!-- Inventory Action -->
     <record id="action_tech_repair_inventory" model="ir.actions.act_window">
