@@ -54,7 +54,7 @@
                         <field name="username"/>
                         <field name="password"/>
                         <field name="service_type"/>
-                        <field name="service_other" attrs="{'invisible': [('service_type', '!=', 'other')]}"/>
+                        <field name="service_other" invisible="service_type!=other"/>
                     </tree>
                 </field>
             </xpath>

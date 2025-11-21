@@ -74,22 +74,6 @@
                             </list>
                         </field>
                     </group>
-                    
-                    <!-- Legacy Single Device Fields (For Backward Compatibility) -->
-                    <group string="Legacy Device Info (Deprecated - Use Devices section above)" name="legacy_device" attrs="{'invisible': [('device_ids', '!=', [])]}">
-                        <group>
-                            <field name="category_id" placeholder="Category"/>  <!-- Category -->
-                            <field name="brand_id" placeholder="Brand"/>  <!-- Brand -->
-                            <field name="model_id" placeholder="Model" domain="[('brand_id', '=', brand_id)]"/>  <!-- Model -->
-                            <field name="model_variant" placeholder="e.g. Pro Max"/> <!-- variant -->
-                        </group>
-                        <group>
-                            <field name="device_color" placeholder="Color" widget="many2one_tags"/> <!-- Color -->
-                            <field name="aesthetic_condition"/> <!-- Aesthetic Conditions -->
-                            <field name="aesthetic_state" placeholder="e.g. Scratches on body"/> 
-                            <field name="serial_number" placeholder="0123456789"/>  <!-- Serial Number -->
-                        </group>
-                    </group>
 
                     <group>
                         <group>
@@ -149,7 +133,7 @@
                                         <field name="software_id" string="Software"/>
                                         <field name="software_price" string="Price" readonly="1"/>
                                         <field name="software_renewal_required" string="Renewal Required" readonly="1"/>
-                                        <field name="software_duration" string="Duration" readonly="1" attrs="{'invisible': [('software_id.renewal_required', '=', False)]}"/>
+                                        <field name="software_duration" string="Duration" readonly="1" invisible="software_id.renewal_required == False"/>
                                         <field name="add_to_sum" string="Add to Total"/>
                                     </list>
                                 </field>
