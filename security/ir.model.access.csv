@@ -4,9 +4,6 @@ access_tech_repair_inventory,access.tech.repair.inventory,model_tech_repair_inve
 access_tech_repair_order_device,access.tech.repair.order.device,model_tech_repair_order_device,,1,1,1,1
 access_tech_repair_loaner_device,access.tech.repair.loaner.device,model_tech_repair_loaner_device,,1,1,1,1
 access_tech_repair_state,access.tech.repair.state,model_tech_repair_state,,1,1,1,1
-access_tech_repair_category,access.tech.repair.category,model_tech_repair_category,,1,1,1,1
-access_tech_repair_brand,access.tech.repair.brand,model_tech_repair_brand,,1,1,1,1
-access_tech_repair_model,access.tech.repair.model,model_tech_repair_model,,1,1,1,1
 access_tech_repair_device_category_user,access.tech.repair.device.category,model_tech_repair_device_category,,1,1,1,1
 access_tech_repair_device_brand_user,access.tech.repair.device.brand,model_tech_repair_device_brand,,1,1,1,1
 access_tech_repair_device_model_user,access.tech.repair.device.model,model_tech_repair_device_model,,1,1,1,1
