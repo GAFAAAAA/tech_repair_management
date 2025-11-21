@@ -5,7 +5,7 @@ import os
 import re
 import uuid
 from io import BytesIO
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.tools import config
 from odoo.exceptions import ValidationError, UserError
 from datetime import timedelta
@@ -948,3 +948,18 @@ class RepairOrder(models.Model):
     def search_by_qr(self, qr_code_value):
         # Cerca una riparazione in base al numero scansionato dal QR Code
         return self.search([('name', '=', qr_code_value)], limit=1)
+
+    
+    def action_open_new_device_popup(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Add New Device to Inventory'),
+            'res_model': 'tech.repair.inventory',
+            'view_mode': 'form',
+            'target': 'new',  # This makes it a modal popup!
+            'context': {
+                # You can prefill fields if you want, e.g.:
+                # 'default_brand_id': self.device_brand_id.id,
+                # Add more defaults as needed
+            }
+        }
