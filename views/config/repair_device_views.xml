@@ -26,8 +26,25 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
+                <field name="category_id"/>
                 <field name="brand_id"/>
             </list>
+        </field>
+    </record>
+
+    <record id="view_tech_repair_device_model_form" model="ir.ui.view">
+        <field name="name">tech.repair.device.model.form</field>
+        <field name="model">tech.repair.device.model</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="category_id"/>
+                        <field name="brand_id"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
 </odoo>
