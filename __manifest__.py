@@ -7,11 +7,11 @@
     'category': 'Services',
     'depends': ['base', 'sale', 'product', 'web', 'website', 'website_payment', 'mail', 'contacts', 'crm'],
     'data': [
+        'views/config/repair_inventory_views.xml',
         'views/repair_order_views.xml',
         # 'views/repair_order_kanban.xml',
         # 'views/qrcodeweb/repair_management_views.xml',
         'views/web/repair_status_page.xml',
-        'views/config/repair_inventory_views.xml',
         'views/config/repair_device_views.xml',
         'views/config/repair_loaner_views.xml',
         'views/config/repair_category_views.xml',
