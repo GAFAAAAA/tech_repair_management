@@ -80,12 +80,10 @@ class RepairInventory(models.Model):
 
     @api.onchange('brand_id')
     def _onchange_brand_id(self):
-        """Clear model when brand changes"""
+        """Clear model and dynamically set domain on model when brand changes"""
         if self.brand_id:
             self.model_id = False
-
-    @api.onchange('model_id')
-    def _onchange_model_id_set_brand(self):
-        """Set brand based on selected model, for user convenience."""
-        if self.model_id:
-            self.brand_id = self.model_id.brand_id.id
+            return {'domain': {'model_id': [('brand_id', '=', self.brand_id.id)]}}
+        else:
+            self.model_id = False
+            return {'domain': {'model_id': []}}
