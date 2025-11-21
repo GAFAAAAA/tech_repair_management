@@ -24,7 +24,7 @@
             <menuitem id="tech_repair_category_menu" name="Device Categories" parent="tech_repair_device_menu" action="action_tech_repair_category"/>
             <menuitem id="tech_repair_brand_menu" name="Device Brands" parent="tech_repair_device_menu" action="action_tech_repair_brand"/>
             <menuitem id="tech_repair_model_menu" name="Device Models" parent="tech_repair_device_menu" action="action_tech_repair_model"/>
-            <menuitem id="tech_repair_device_color" name="Device Colors" parent="tech_repair_device_menu" action="action_tech_repair_device_color"/>
+            <menuitem id="tech_repair_device_Variant" name="Device Variants" parent="tech_repair_device_menu" action="action_tech_repair_device_variant"/>
 
         <!-- Sub Menu States-->
         <menuitem id="tech_repair_status_menu" name="States" parent="tech_repair_config_menu"/>

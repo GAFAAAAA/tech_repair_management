@@ -38,13 +38,9 @@ class RepairOrder(models.Model):
     category_id = fields.Many2one('tech.repair.device.category', string='Category', required=False)
     brand_id = fields.Many2one('tech.repair.device.brand', string='Brand', required=False)
     model_id = fields.Many2one('tech.repair.device.model', string='Model', required=False)
-    model_variant = fields.Char(string="Variant")
+    variant_id = fields.Many2one('tech.repair.device.variant', string='Variant', domain=[],)
 
-    device_color = fields.Many2one(
-        'tech.repair.device.color',
-        string="Color",
-        help="Select the device color",
-        )
+
 
     aesthetic_condition = fields.Selection([
         ('new', 'New'),
@@ -295,7 +291,7 @@ class RepairOrder(models.Model):
         for record in self:
             record.device_count = len(record.device_ids)
 
-    @api.depends('device_ids', 'device_ids.name', 'category_id', 'brand_id', 'model_id', 'model_variant')
+    @api.depends('device_ids', 'device_ids.name', 'category_id', 'brand_id', 'model_id', 'variant_id')
     def _compute_device_summary(self):
         """Generate a summary of devices for display in list view"""
         for record in self:
@@ -309,8 +305,8 @@ class RepairOrder(models.Model):
             elif record.category_id and record.brand_id and record.model_id:
                 # Use legacy fields
                 parts = [record.category_id.name, record.brand_id.name, record.model_id.name]
-                if record.model_variant:
-                    parts.append(record.model_variant)
+                if record.variant_id:
+                    parts.append(record.variant_id)
                 record.device_summary = ' '.join(parts)
             else:
                 record.device_summary = 'No devices'

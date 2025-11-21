@@ -109,13 +109,11 @@
                             </colgroup>
                             <tr>
                                 <td class="text-start">
-                                    Categoria: <b><span t-field="o.category_id.name"/></b> <br/>
-                                    Marca: <b><span t-field="o.brand_id.name"/></b> <br/>
-                                    Modello: <b><span t-field="o.model_id.name"/></b> <br/>
-                                    Variante: <b><span t-field="o.model_variant"/></b> <br/>
-                                    IMEI / Seriale: <b><span t-field="o.serial_number"/></b> <br/>
-                                    Condizioni Estetiche: <b><span t-field="o.aesthetic_condition"/></b> <br/>
-                                    Difetti Visivi: <b><span t-field="o.aesthetic_state"/></b> <br/>
+                                    Category: <b><span t-field="o.category_id.name"/></b> <br/>
+                                    Brand: <b><span t-field="o.brand_id.name"/></b> <br/>
+                                    Model: <b><span t-field="o.model_id.name"/></b> <br/>
+                                    Variant: <b><span t-field="o.variant_id"/></b> <br/>
+                                    Serial: <b><span t-field="o.serial_number"/></b> <br/>
                                 </td>
 
                                 <td class="text-center" style="text-align: left !important;">

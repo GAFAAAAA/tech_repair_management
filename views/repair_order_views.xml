@@ -64,12 +64,11 @@
                                 <field name="category_id" required="1"/>
                                 <field name="brand_id" required="1"/>
                                 <field name="model_id" required="1" domain="[('brand_id', '=', brand_id)]"/>
-                                <field name="model_variant"/>
+                                <field name="variant_id"/>
                                 <field name="inventory_id" required="1" 
-                                       domain="[('category_id', '=', category_id), ('brand_id', '=', brand_id), ('model_id', '=', model_id), ('model_variant', '=', model_variant), ('status', '=', 'available')]"
+                                       domain="[('category_id', '=', category_id), ('brand_id', '=', brand_id), ('model_id', '=', model_id), ('variant_id', '=', variant_id), ('status', '=', 'available')]"
                                        options="{'no_create': True, 'no_open': True}"/>
                                 <field name="serial_number"/>
-                                <field name="device_color"/>
                                 <field name="aesthetic_condition"/>
                             </list>
                         </field>

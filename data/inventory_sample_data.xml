@@ -20,7 +20,7 @@
     <record id="inventory_canon_hj_001" model="tech.repair.inventory">
         <field name="brand_id" ref="brand_canon"/>
         <field name="model_id" ref="model_hj"/>
-        <field name="model_variant">14x4.3</field>
+        <field name="variant_id">14x4.3</field>
         <field name="serial_number">CNH14X001</field>
         <field name="status">available</field>
         <field name="notes">Sample Canon HJ 14x4.3 lens</field>
@@ -29,7 +29,7 @@
     <record id="inventory_canon_hj_002" model="tech.repair.inventory">
         <field name="brand_id" ref="brand_canon"/>
         <field name="model_id" ref="model_hj"/>
-        <field name="model_variant">14x4.3</field>
+        <field name="variant_id">14x4.3</field>
         <field name="serial_number">CNH14X002</field>
         <field name="status">available</field>
         <field name="notes">Sample Canon HJ 14x4.3 lens</field>
@@ -38,7 +38,7 @@
     <record id="inventory_canon_hj_003" model="tech.repair.inventory">
         <field name="brand_id" ref="brand_canon"/>
         <field name="model_id" ref="model_hj"/>
-        <field name="model_variant">14x4.3</field>
+        <field name="variant_id">14x4.3</field>
         <field name="serial_number">CNH14X003</field>
         <field name="status">available</field>
         <field name="notes">Sample Canon HJ 14x4.3 lens</field>
@@ -48,7 +48,7 @@
     <record id="inventory_iphone16_001" model="tech.repair.inventory">
         <field name="brand_id" ref="brand_apple"/>
         <field name="model_id" ref="model_iphone_16"/>
-        <field name="model_variant">Pro Max</field>
+        <field name="variant_id">Pro Max</field>
         <field name="serial_number">IP16PM001</field>
         <field name="status">available</field>
         <field name="notes">Sample iPhone 16 Pro Max</field>
@@ -57,7 +57,7 @@
     <record id="inventory_iphone16_002" model="tech.repair.inventory">
         <field name="brand_id" ref="brand_apple"/>
         <field name="model_id" ref="model_iphone_16"/>
-        <field name="model_variant">Pro Max</field>
+        <field name="variant_id">Pro Max</field>
         <field name="serial_number">IP16PM002</field>
         <field name="status">available</field>
         <field name="notes">Sample iPhone 16 Pro Max</field>

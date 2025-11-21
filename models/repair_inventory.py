@@ -18,7 +18,7 @@ class RepairInventory(models.Model):
     )
     brand_id = fields.Many2one('tech.repair.device.brand', string='Brand')  # No required=True here!
     model_id = fields.Many2one('tech.repair.device.model', string='Model', domain=[],)  # No required=True, no domain in field!
-    model_variant = fields.Char(string="Variant", help="e.g. 14x4.3")
+    variant_id = fields.Many2one('tech.repair.device.variant', string='Variant', domain=[],)
     serial_number = fields.Char(string='Serial Number', required=True)
     
     # Status tracking
@@ -39,7 +39,7 @@ class RepairInventory(models.Model):
 
     active = fields.Boolean(default=True, string="Active")
 
-    @api.depends('category_id', 'brand_id', 'model_id', 'model_variant', 'serial_number')
+    @api.depends('category_id', 'brand_id', 'model_id', 'variant_id', 'serial_number')
     def _compute_name(self):
         for record in self:
             parts = []
@@ -49,13 +49,13 @@ class RepairInventory(models.Model):
                 parts.append(record.brand_id.name)
             if record.model_id:
                 parts.append(record.model_id.name)
-            if record.model_variant:
-                parts.append(record.model_variant)
+            if record.variant_id:
+                parts.append(record.variant_id)
             if record.serial_number:
                 parts.append(f"S/N: {record.serial_number}")
             record.name = ' - '.join(parts) if parts else 'New Inventory Item'
 
-    @api.constrains('serial_number', 'category_id', 'brand_id', 'model_id', 'model_variant')
+    @api.constrains('serial_number', 'category_id', 'brand_id', 'model_id', 'variant_id')
     def _check_unique_serial(self):
         for record in self:
             domain = [
@@ -63,7 +63,7 @@ class RepairInventory(models.Model):
                 ('category_id', '=', record.category_id.id),
                 ('brand_id', '=', record.brand_id.id),
                 ('model_id', '=', record.model_id.id),
-                ('model_variant', '=', record.model_variant),
+                ('variant_id', '=', record.variant_id),
                 ('id', '!=', record.id),
                 ('active', '=', True)
             ]
@@ -71,5 +71,5 @@ class RepairInventory(models.Model):
                 raise ValidationError(
                     f"A device with serial number '{record.serial_number}' for "
                     f"{record.category_id.name} {record.brand_id.name} {record.model_id.name} "
-                    f"{record.model_variant or ''} already exists in inventory."
+                    f"{record.variant_id or ''} already exists in inventory."
                 )

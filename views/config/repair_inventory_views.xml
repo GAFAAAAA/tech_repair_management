@@ -16,7 +16,7 @@
                           <field name="category_id" placeholder="Category" required="1"/>
                           <field name="brand_id" placeholder="Brand"/>
                           <field name="model_id" placeholder="Model"/>
-                          <field name="model_variant" placeholder="e.g., Pro Max, 14x4.3"/>
+                          <field name="variant_id" placeholder="e.g., Pro Max, 14x4.3"/>
                           <field name="serial_number" placeholder="Serial Number" required="1"/>
                         </group>
                         <group>
@@ -44,7 +44,7 @@
                 <field name="category_id"/>
                 <field name="brand_id"/>
                 <field name="model_id"/>
-                <field name="model_variant"/>
+                <field name="variant_id"/>
                 <field name="serial_number"/>
                 <field name="status" decoration-success="status == 'available'" decoration-warning="status == 'in_repair'" decoration-muted="status == 'returned'"/>
                 <field name="repair_order_id"/>
@@ -63,7 +63,7 @@
         <field name="category_id"/>
         <field name="brand_id"/>
         <field name="model_id"/>
-        <field name="model_variant"/>
+        <field name="variant_id"/>
         <filter name="filter_available" string="Available" domain="[('status', '=', 'available')]"/>
         <filter name="filter_in_repair" string="In Repair" domain="[('status', '=', 'in_repair')]"/>
         <filter name="filter_returned" string="Returned" domain="[('status', '=', 'returned')]"/>

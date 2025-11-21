@@ -1,0 +1,34 @@
+<odoo>
+    <record id="view_repair_device_variant_list" model="ir.ui.view">
+        <field name="name">tech.repair.device.variant.list</field>
+        <field name="model">tech.repair.device.variant</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_repair_device_variant_form" model="ir.ui.view">
+        <field name="name">tech.repair.device.variant.form</field>
+        <field name="model">tech.repair.device.variant</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tech_repair_device_variant" model="ir.actions.act_window">      
+        <field name="name">Device Variant</field>
+        <field name="res_model">tech.repair.device.variant</field>
+        <field name="view_mode">list,form</field>
+         <field name="type">ir.actions.act_window</field>
+    </record>
+
+    
+</odoo>

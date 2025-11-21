@@ -19,7 +19,7 @@
         'views/config/repair_model_views.xml',
         'views/config/repair_state_views.xml',
         'views/config/repair_state_public_views.xml',
-        'views/config/repair_device_color_views.xml',
+        'views/config/repair_device_variant_views.xml',
         'views/config/repair_term_views.xml',
         'views/config/repair_software.xml',
         'views/config/repair_worktype.xml',
