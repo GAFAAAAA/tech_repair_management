@@ -13,123 +13,25 @@
   <record id="brand_canon" model="tech.repair.device.brand">
     <field name="name">Canon</field>
   </record>
-
-  <!-- Nikon -->
-  <record id="brand_nikon" model="tech.repair.device.brand">
-    <field name="name">Nikon</field>
-  </record>
-
-  <!-- Sony -->
-  <record id="brand_sony" model="tech.repair.device.brand">
-    <field name="name">Sony</field>
-  </record>
-
-  <!-- Fujifilm -->
-  <record id="brand_fujifilm" model="tech.repair.device.brand">
-    <field name="name">Fujifilm</field>
-  </record>
-
-  <!-- Panasonic -->
-  <record id="brand_panasonic" model="tech.repair.device.brand">
-    <field name="name">Panasonic</field>
-  </record>
-
-  <!-- Olympus -->
-  <record id="brand_olympus" model="tech.repair.device.brand">
-    <field name="name">Olympus</field>
-  </record>
-
-  <!-- Sigma -->
-  <record id="brand_sigma" model="tech.repair.device.brand">
-    <field name="name">Sigma</field>
-  </record>
-
-  <!-- Tamron -->
-  <record id="brand_tamron" model="tech.repair.device.brand">
-    <field name="name">Tamron</field>
-  </record>
-
+  
   <!-- ********* Models (Camera and Lens) *********** -->
 
   <!-- Canon Camera Models -->
-  <record id="model_canon_eos_r5" model="tech.repair.device.model">
-    <field name="name">EOS R5</field>
-    <field name="brand_id" ref="brand_canon"/>
-    <field name="category_id" ref="category_camera"/>
-  </record>
-  <record id="model_canon_eos_90d" model="tech.repair.device.model">
-    <field name="name">EOS 90D</field>
+  <record id="model_canon_eos_5d" model="tech.repair.device.model">
+    <field name="name">EOS 5D</field>
     <field name="brand_id" ref="brand_canon"/>
     <field name="category_id" ref="category_camera"/>
   </record>
 
-  <!-- Canon Lens Models -->
-  <record id="model_canon_rf_24_70" model="tech.repair.device.model">
-    <field name="name">RF 24-70mm F2.8L IS USM</field>
-    <field name="brand_id" ref="brand_canon"/>
-    <field name="category_id" ref="category_lens"/>
+  <!-- ********* Variants *********** -->
+  <record id="variant_canon_eos_5d_mkiii" model="tech.repair.device.model.variant">
+    <field name="name">Mark III</field>
+    <field name="model_id" ref="model_canon_eos_5d"/>
+  </record>
+  
+  <record id="variant_canon_eos_5d_mkiv" model="tech.repair.device.model.variant">
+    <field name="name">Mark IV</field>
+    <field name="model_id" ref="model_canon_eos_5d"/>
   </record>
 
-  <!-- Nikon Camera Models -->
-  <record id="model_nikon_z7ii" model="tech.repair.device.model">
-    <field name="name">Z 7II</field>
-    <field name="brand_id" ref="brand_nikon"/>
-    <field name="category_id" ref="category_camera"/>
-  </record>
-
-  <!-- Nikon Lens Models -->
-  <record id="model_nikon_z_24_70" model="tech.repair.device.model">
-    <field name="name">NIKKOR Z 24-70mm f/2.8 S</field>
-    <field name="brand_id" ref="brand_nikon"/>
-    <field name="category_id" ref="category_lens"/>
-  </record>
-
-  <!-- Sony Camera Models -->
-  <record id="model_sony_a7_iv" model="tech.repair.device.model">
-    <field name="name">Alpha 7 IV</field>
-    <field name="brand_id" ref="brand_sony"/>
-    <field name="category_id" ref="category_camera"/>
-  </record>
-
-  <!-- Sony Lens Models -->
-  <record id="model_sony_fe_24_70" model="tech.repair.device.model">
-    <field name="name">FE 24-70mm F2.8 GM</field>
-    <field name="brand_id" ref="brand_sony"/>
-    <field name="category_id" ref="category_lens"/>
-  </record>
-
-  <!-- Fujifilm Camera Models -->
-  <record id="model_fujifilm_x_t5" model="tech.repair.device.model">
-    <field name="name">X-T5</field>
-    <field name="brand_id" ref="brand_fujifilm"/>
-    <field name="category_id" ref="category_camera"/>
-  </record>
-
-  <!-- Panasonic Camera Models -->
-  <record id="model_panasonic_s5ii" model="tech.repair.device.model">
-    <field name="name">Lumix S5II</field>
-    <field name="brand_id" ref="brand_panasonic"/>
-    <field name="category_id" ref="category_camera"/>
-  </record>
-
-  <!-- Olympus Camera Models -->
-  <record id="model_olympus_omd_em1" model="tech.repair.device.model">
-    <field name="name">OM-D E-M1 Mark III</field>
-    <field name="brand_id" ref="brand_olympus"/>
-    <field name="category_id" ref="category_camera"/>
-  </record>
-
-  <!-- Sigma Lens Models -->
-  <record id="model_sigma_24_70" model="tech.repair.device.model">
-    <field name="name">24-70mm F2.8 DG DN Art</field>
-    <field name="brand_id" ref="brand_sigma"/>
-    <field name="category_id" ref="category_lens"/>
-  </record>
-
-  <!-- Tamron Lens Models -->
-  <record id="model_tamron_28_75" model="tech.repair.device.model">
-    <field name="name">28-75mm F2.8 Di III VXD G2</field>
-    <field name="brand_id" ref="brand_tamron"/>
-    <field name="category_id" ref="category_lens"/>
-  </record>
 </odoo>
