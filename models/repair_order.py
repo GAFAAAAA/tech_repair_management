@@ -33,6 +33,9 @@ class RepairOrder(models.Model):
     device_count = fields.Integer(string='Device Count', compute='_compute_device_count', store=True)
     device_summary = fields.Char(string='Devices', compute='_compute_device_summary', store=True)
     
+    # Case support for bulk device addition
+    temp_case_id = fields.Many2one('tech.repair.case', string='Add from Case', store=False, help="Select a case to add all its devices to this repair order")
+    
     # Legacy fields for backward compatibility (deprecated - use device_ids instead)
     # These fields are no longer required to support orders with only device_ids
     category_id = fields.Many2one('tech.repair.device.category', string='Category', required=False)
@@ -891,6 +894,54 @@ class RepairOrder(models.Model):
     # sblocca la firma
     def action_unlock_signature(self):
         self.write({'signature_locked': False})
+    
+    def action_add_devices_from_case(self):
+        """Add all devices from the selected case to the repair order"""
+        if not self.temp_case_id:
+            raise UserError("Please select a case first.")
+        
+        # Store case name before clearing
+        case_name = self.temp_case_id.name
+        
+        # Find all devices in the selected case that are available
+        devices_in_case = self.env['tech.repair.inventory'].search([
+            ('case_id', '=', self.temp_case_id.id),
+            ('status', '=', 'available')
+        ])
+        
+        if not devices_in_case:
+            raise UserError("No available devices found in the selected case.")
+        
+        # Update the customer if case has a company
+        if self.temp_case_id.company_id:
+            self.customer_id = self.temp_case_id.company_id
+        
+        # Add each device to the repair order
+        device_lines = []
+        for device in devices_in_case:
+            device_lines.append((0, 0, {
+                'category_id': device.category_id.id,
+                'brand_id': device.brand_id.id,
+                'model_id': device.model_id.id,
+                'variant_id': device.variant_id.id if device.variant_id else False,
+                'inventory_id': device.id,
+            }))
+        
+        self.device_ids = device_lines
+        
+        # Clear the temporary case selection
+        self.temp_case_id = False
+        
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': 'Success!',
+                'message': f'{len(devices_in_case)} device(s) added from case {case_name}',
+                'sticky': False,
+                'type': 'success',
+            }
+        }
     
     # Ricerca per QRCode
     @api.model

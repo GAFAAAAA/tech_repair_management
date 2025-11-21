@@ -58,6 +58,13 @@
                     
                     <!-- Multiple Devices Section -->
                     <group string="Devices" name="devices_section">
+                        <group string="Add Devices from Case">
+                            <label for="temp_case_id"/>
+                            <div class="o_row">
+                                <field name="temp_case_id" placeholder="Select a case..." nolabel="1"/>
+                                <button name="action_add_devices_from_case" type="object" string="Add All Devices" class="btn-primary" icon="fa-plus-square" aria-label="Add all devices from selected case"/>
+                            </div>
+                        </group>
                         <field name="device_ids" nolabel="1" context="{'default_repair_order_id': id}">
                             <list editable="bottom">
                                 <field name="sequence" widget="handle"/>
