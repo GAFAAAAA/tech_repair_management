@@ -73,32 +73,3 @@ class RepairInventory(models.Model):
                     f"{record.category_id.name} {record.brand_id.name} {record.model_id.name} "
                     f"{record.model_variant or ''} already exists in inventory."
                 )
-
-    @api.constrains('brand_id', 'model_id')
-    def _check_brand_and_model_required(self):
-        for rec in self:
-            if not rec.brand_id:
-                raise ValidationError("Brand is required.")
-            if not rec.model_id:
-                raise ValidationError("Model is required.")
-
-    @api.onchange('category_id')
-    def _onchange_category_id(self):
-        if self.category_id:
-            self.brand_id = False
-            self.model_id = False
-
-    @api.onchange('brand_id')
-    def _onchange_brand_id(self):
-        self.model_id = False
-        domain = {'model_id': [('brand_id', '=', self.brand_id.id)]} if self.brand_id else {'model_id': []}
-        return {'domain': domain}
-
-    @api.onchange('model_id')
-    def _onchange_model_id(self):
-        if self.model_id:
-            self.brand_id = self.model_id.brand_id
-            # Show only models that match the brand
-            if self.model_id.brand_id:
-                return {'domain': {'model_id': [('brand_id', '=', self.model_id.brand_id.id)]}}
-        return {'domain': {'model_id': []}}
