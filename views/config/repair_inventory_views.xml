@@ -15,7 +15,7 @@
                         <group>
                           <field name="category_id" placeholder="Category" required="1"/>
                           <field name="brand_id" placeholder="Brand" required="1" 
-                                 domain="[('id', 'in', [])]" 
+                                 domain="[('id', '=', False)]" 
                                  context="{'form_view_ref': 'tech_repair_management.view_tech_repair_brand_form'}"/>
                           <field name="model_id" placeholder="Model" required="1" 
                                  domain="[('category_id', '=', category_id), ('brand_id', '=', brand_id)]"

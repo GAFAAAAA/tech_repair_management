@@ -50,7 +50,7 @@ class RepairOrderDevice(models.Model):
             if record.model_id:
                 parts.append(record.model_id.name)
             if record.variant_id:
-                parts.append(record.variant_id)
+                parts.append(record.variant_id.name)
             if record.serial_number:
                 parts.append(f"(S/N: {record.serial_number})")
             record.name = ' '.join(parts) if parts else 'Device'
@@ -77,8 +77,8 @@ class RepairOrderDevice(models.Model):
             }
         return {
             'domain': {
-                'brand_id': [],
-                'model_id': [],
+                'brand_id': [('id', '=', False)],
+                'model_id': [('id', '=', False)],
                 'variant_id': [('id', '=', False)],
             }
         }
