@@ -68,8 +68,8 @@ class RepairInventory(models.Model):
             }
         return {
             'domain': {
-                'brand_id': [],
-                'model_id': [],
+                'brand_id': [('id', '=', False)],
+                'model_id': [('id', '=', False)],
                 'variant_id': [('id', '=', False)],
             }
         }

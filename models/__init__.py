@@ -2,6 +2,7 @@ from . import repair_inventory
 from . import repair_order_device
 from . import repair_order
 from . import repair_device
+from . import repair_device_variant
 from . import repair_loaner
 from . import repair_state
 from . import repair_credentials
