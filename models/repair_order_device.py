@@ -13,7 +13,7 @@ class RepairOrderDevice(models.Model):
     category_id = fields.Many2one('tech.repair.device.category', string='Category', required=True)
     brand_id = fields.Many2one('tech.repair.device.brand', string='Brand', required=True)
     model_id = fields.Many2one('tech.repair.device.model', string='Model', required=True, domain="[('brand_id', '=', brand_id)]")
-    model_variant =  fields.Many2one('tech.repair.device.variant', string='Variant', required=False)
+    variant_id =  fields.Many2one('tech.repair.device.variant', string='Variant', required=False)
     
     # Serial number from inventory
     inventory_id = fields.Many2one(
