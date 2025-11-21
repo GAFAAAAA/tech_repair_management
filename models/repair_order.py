@@ -900,6 +900,9 @@ class RepairOrder(models.Model):
         if not self.temp_case_id:
             raise UserError("Please select a case first.")
         
+        # Store case name before clearing
+        case_name = self.temp_case_id.name
+        
         # Find all devices in the selected case that are available
         devices_in_case = self.env['tech.repair.inventory'].search([
             ('case_id', '=', self.temp_case_id.id),
@@ -934,7 +937,7 @@ class RepairOrder(models.Model):
             'tag': 'display_notification',
             'params': {
                 'title': 'Success!',
-                'message': f'{len(devices_in_case)} device(s) added from case {self.temp_case_id.name if self.temp_case_id else ""}',
+                'message': f'{len(devices_in_case)} device(s) added from case {case_name}',
                 'sticky': False,
                 'type': 'success',
             }
