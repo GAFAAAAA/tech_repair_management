@@ -15,7 +15,7 @@
                         <group>
                             <field name="category_id" placeholder="Category" required="1"/>
                             <field name="brand_id" placeholder="Brand" required="1"/>
-                            <field name="model_id" placeholder="Model" required="1"/>
+                            <field name="model_id" required="1"/>
                             <field name="model_variant" placeholder="e.g., Pro Max, 14x4.3"/>
                             <field name="serial_number" placeholder="Serial Number" required="1"/>
                         </group>
