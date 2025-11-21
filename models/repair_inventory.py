@@ -71,15 +71,16 @@ class RepairInventory(models.Model):
             self.model_id = False
             self.variant_id = False
             # Return domain to filter models by category and brand
-            return {
-                'domain': {
-                    'model_id': [
-                        ('category_id', '=', self.category_id.id),
-                        ('brand_id', '=', self.brand_id.id)
-                    ],
-                    'variant_id': [('id', '=', False)],
+            if self.category_id:
+                return {
+                    'domain': {
+                        'model_id': [
+                            ('category_id', '=', self.category_id.id),
+                            ('brand_id', '=', self.brand_id.id)
+                        ],
+                        'variant_id': [('id', '=', False)],
+                    }
                 }
-            }
         return {
             'domain': {
                 'model_id': [('id', '=', False)],
@@ -92,7 +93,7 @@ class RepairInventory(models.Model):
         """Clear variant when model changes and validate model matches category and brand"""
         if self.model_id:
             # Validate that the selected model matches the category and brand
-            if self.model_id.category_id != self.category_id:
+            if self.category_id and self.model_id.category_id != self.category_id:
                 self.model_id = False
                 return {
                     'warning': {
@@ -100,7 +101,7 @@ class RepairInventory(models.Model):
                         'message': 'The selected model does not belong to the chosen category.'
                     }
                 }
-            if self.model_id.brand_id != self.brand_id:
+            if self.brand_id and self.model_id.brand_id != self.brand_id:
                 self.model_id = False
                 return {
                     'warning': {
