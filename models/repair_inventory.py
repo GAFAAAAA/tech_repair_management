@@ -2,17 +2,22 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 class RepairInventory(models.Model):
-    """Inventory system for tracking customer devices checked in"""
     _name = 'tech.repair.inventory'
     _description = 'Device Inventory'
     _order = 'create_date desc'
 
     name = fields.Char(string='Inventory Reference', compute='_compute_name', store=True)
-    
+
     # Device information
-    category_id = fields.Many2one(related='model_id.category_id',comodel_name='tech.repair.device.category',string='Category',store=True,readonly=True,)
-    brand_id = fields.Many2one('tech.repair.device.brand', string='Brand', required=True)
-    model_id = fields.Many2one('tech.repair.device.model', string='Model', required=True, domain="[('brand_id', '=', brand_id)]")
+    category_id = fields.Many2one(
+        related='model_id.category_id',
+        comodel_name='tech.repair.device.category',
+        string='Category',
+        store=True,
+        readonly=True,
+    )
+    brand_id = fields.Many2one('tech.repair.device.brand', string='Brand')  # No required=True here!
+    model_id = fields.Many2one('tech.repair.device.model', string='Model', domain=[],)  # No required=True, no domain in field!
     model_variant = fields.Char(string="Variant", help="e.g. 14x4.3")
     serial_number = fields.Char(string='Serial Number', required=True)
     
@@ -31,12 +36,11 @@ class RepairInventory(models.Model):
     checked_in_by = fields.Many2one('res.users', string='Checked In By', default=lambda self: self.env.user, readonly=True)
     
     notes = fields.Text(string='Notes')
-    
+
     active = fields.Boolean(default=True, string="Active")
 
     @api.depends('category_id', 'brand_id', 'model_id', 'model_variant', 'serial_number')
     def _compute_name(self):
-        """Generate a display name for the inventory item"""
         for record in self:
             parts = []
             if record.category_id:
@@ -53,7 +57,6 @@ class RepairInventory(models.Model):
 
     @api.constrains('serial_number', 'category_id', 'brand_id', 'model_id', 'model_variant')
     def _check_unique_serial(self):
-        """Ensure serial numbers are unique for the same device configuration"""
         for record in self:
             domain = [
                 ('serial_number', '=', record.serial_number),
@@ -71,9 +74,16 @@ class RepairInventory(models.Model):
                     f"{record.model_variant or ''} already exists in inventory."
                 )
 
+    @api.constrains('brand_id', 'model_id')
+    def _check_brand_and_model_required(self):
+        for rec in self:
+            if not rec.brand_id:
+                raise ValidationError("Brand is required.")
+            if not rec.model_id:
+                raise ValidationError("Model is required.")
+
     @api.onchange('category_id')
     def _onchange_category_id(self):
-        """Clear brand and model when category changes"""
         if self.category_id:
             self.brand_id = False
             self.model_id = False
@@ -88,8 +98,7 @@ class RepairInventory(models.Model):
     def _onchange_model_id(self):
         if self.model_id:
             self.brand_id = self.model_id.brand_id
-            # When model is picked, restrict model choices only to this model's brand as well!
+            # Show only models that match the brand
             if self.model_id.brand_id:
                 return {'domain': {'model_id': [('brand_id', '=', self.model_id.brand_id.id)]}}
-        else:
-            return {'domain': {'model_id': []}}
+        return {'domain': {'model_id': []}}
