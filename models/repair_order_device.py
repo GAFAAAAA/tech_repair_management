@@ -12,8 +12,8 @@ class RepairOrderDevice(models.Model):
     # Device configuration
     category_id = fields.Many2one('tech.repair.device.category', string='Category', required=True)
     brand_id = fields.Many2one('tech.repair.device.brand', string='Brand', required=True)
-    model_id = fields.Many2one('tech.repair.device.model', string='Model', required=True, domain="[('brand_id', '=', brand_id)]")
-    variant_id =  fields.Many2one('tech.repair.device.variant', string='Variant', required=False)
+    model_id = fields.Many2one('tech.repair.device.model', string='Model', required=True, domain="[('category_id', '=', category_id), ('brand_id', '=', brand_id)]")
+    variant_id =  fields.Many2one('tech.repair.device.variant', string='Variant', required=False, domain="[('model_id', '=', model_id)]")
     
     # Serial number from inventory
     inventory_id = fields.Many2one(
@@ -63,6 +63,25 @@ class RepairOrderDevice(models.Model):
             self.model_id = False
             self.variant_id = False
             self.inventory_id = False
+            # Return domain to filter brands that have models in this category
+            model_ids = self.env['tech.repair.device.model'].search([
+                ('category_id', '=', self.category_id.id)
+            ])
+            brand_ids = model_ids.mapped('brand_id').ids
+            return {
+                'domain': {
+                    'brand_id': [('id', 'in', brand_ids)],
+                    'model_id': [('category_id', '=', self.category_id.id)],
+                    'variant_id': [('id', '=', False)],
+                }
+            }
+        return {
+            'domain': {
+                'brand_id': [],
+                'model_id': [],
+                'variant_id': [('id', '=', False)],
+            }
+        }
 
     @api.onchange('brand_id')
     def _onchange_brand_id(self):
@@ -71,6 +90,23 @@ class RepairOrderDevice(models.Model):
             self.model_id = False
             self.variant_id = False
             self.inventory_id = False
+            # Return domain to filter models by category and brand
+            if self.category_id:
+                return {
+                    'domain': {
+                        'model_id': [
+                            ('category_id', '=', self.category_id.id),
+                            ('brand_id', '=', self.brand_id.id)
+                        ],
+                        'variant_id': [('id', '=', False)],
+                    }
+                }
+        return {
+            'domain': {
+                'model_id': [('id', '=', False)],
+                'variant_id': [('id', '=', False)],
+            }
+        }
 
     @api.onchange('model_id')
     def _onchange_model_id(self):
@@ -78,6 +114,17 @@ class RepairOrderDevice(models.Model):
         if self.model_id:
             self.variant_id = False
             self.inventory_id = False
+            # Return domain to filter variants by model
+            return {
+                'domain': {
+                    'variant_id': [('model_id', '=', self.model_id.id)]
+                }
+            }
+        return {
+            'domain': {
+                'variant_id': [('id', '=', False)]
+            }
+        }
 
     @api.onchange('variant_id')
     def _onchange_variant_id(self):
