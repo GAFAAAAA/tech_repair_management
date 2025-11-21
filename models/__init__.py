@@ -15,4 +15,5 @@ from . import repair_worktype
 from . import repair_term
 from . import res_partner
 from . import crm_lead
+from . import repair_case
 

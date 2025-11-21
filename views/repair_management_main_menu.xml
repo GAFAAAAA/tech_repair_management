@@ -12,12 +12,15 @@
     <!-- Menu for inventory -->
     <menuitem id="tech_repair_inventory_menu" name="Inventory" parent="tech_repair_management_main_menu" sequence="2" action="action_tech_repair_inventory"/>
 
+    <!-- Menu for cases -->
+    <menuitem id="tech_repair_case_menu" name="Cases" parent="tech_repair_management_main_menu" sequence="3" action="action_tech_repair_case"/>
+
     <!-- Menu for managing loaner devices -->
-    <menuitem id="tech_repair_loaner_device_menu" name="Loaner Devices" parent="tech_repair_management_main_menu" sequence="3"/>
+    <menuitem id="tech_repair_loaner_device_menu" name="Loaner Devices" parent="tech_repair_management_main_menu" sequence="4"/>
         <menuitem id="tech_repair_loaner_device_submenu" name="Loaner Management" parent="tech_repair_loaner_device_menu" action="action_tech_repair_loaner"/>
     
     <!-- Menu for configuration -->
-    <menuitem id="tech_repair_config_menu" name="Configuration" parent="tech_repair_management_main_menu" sequence="4"/>
+    <menuitem id="tech_repair_config_menu" name="Configuration" parent="tech_repair_management_main_menu" sequence="5"/>
         <!-- Sub Menu Devices-->
         <menuitem id="tech_repair_device_menu" name="Devices" parent="tech_repair_config_menu"/>
             <!-- Submenu items Devices-->

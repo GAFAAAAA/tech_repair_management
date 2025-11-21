@@ -8,6 +8,7 @@
     'depends': ['base', 'sale', 'product', 'web', 'website', 'website_payment', 'mail', 'contacts', 'crm'],
     'data': [
         'views/config/repair_inventory_views.xml',
+        'views/config/repair_case_views.xml',
         'views/repair_order_views.xml',
         # 'views/repair_order_kanban.xml',
         # 'views/qrcodeweb/repair_management_views.xml',
@@ -34,6 +35,7 @@
         'data/repair_state_data.xml',
         'data/repair_software_data.xml',
         'data/repair_order_sequence.xml',
+        'data/repair_case_sequence.xml',
         'data/repair_worktype_data.xml',
         'data/device_data.xml',
         # 'data/inventory_sample_data.xml',

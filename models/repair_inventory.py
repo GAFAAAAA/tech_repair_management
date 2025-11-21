@@ -19,6 +19,10 @@ class RepairInventory(models.Model):
     variant_id = fields.Many2one('tech.repair.device.variant', string='Variant')
     serial_number = fields.Char(string='Serial Number', required=True)
     
+    # Case and customer tracking
+    case_id = fields.Many2one('tech.repair.case', string='Case', help="Flight case this device came in")
+    customer_id = fields.Many2one('res.partner', string='Customer', help="Customer who owns this device")
+    
     # Status tracking
     status = fields.Selection([
         ('available', 'Available'),
@@ -36,6 +40,12 @@ class RepairInventory(models.Model):
     notes = fields.Text(string='Notes')
 
     active = fields.Boolean(default=True, string="Active")
+
+    @api.onchange('case_id')
+    def _onchange_case_id(self):
+        """Automatically link customer when case is selected"""
+        if self.case_id and self.case_id.company_id:
+            self.customer_id = self.case_id.company_id
 
     @api.onchange('category_id')
     def _onchange_category_id(self):
