@@ -13,7 +13,7 @@ class RepairInventory(models.Model):
     category_id = fields.Many2one(related='model_id.category_id',comodel_name='tech.repair.device.category',string='Category',store=True,readonly=True,)
     brand_id = fields.Many2one('tech.repair.device.brand', string='Brand', required=True)
     model_id = fields.Many2one('tech.repair.device.model', string='Model', required=True, domain="[('brand_id', '=', brand_id)]")
-    model_variant = fields.Char(string="Variant", help="e.g., Pro Max, 14x4.3")
+    model_variant = fields.Char(string="Variant", help="e.g. 14x4.3")
     serial_number = fields.Char(string='Serial Number', required=True)
     
     # Status tracking
