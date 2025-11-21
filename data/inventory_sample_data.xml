@@ -13,11 +13,11 @@
     <record id="model_hj" model="tech.repair.device.model">
         <field name="name">HJ</field>
         <field name="brand_id" ref="brand_canon"/>
+        <field name="category_id" ref="category_lens"/>
     </record>
     
     <!-- Sample inventory items -->
     <record id="inventory_canon_hj_001" model="tech.repair.inventory">
-        <field name="category_id" ref="category_lens"/>
         <field name="brand_id" ref="brand_canon"/>
         <field name="model_id" ref="model_hj"/>
         <field name="model_variant">14x4.3</field>
@@ -27,7 +27,6 @@
     </record>
     
     <record id="inventory_canon_hj_002" model="tech.repair.inventory">
-        <field name="category_id" ref="category_lens"/>
         <field name="brand_id" ref="brand_canon"/>
         <field name="model_id" ref="model_hj"/>
         <field name="model_variant">14x4.3</field>
@@ -37,7 +36,6 @@
     </record>
     
     <record id="inventory_canon_hj_003" model="tech.repair.inventory">
-        <field name="category_id" ref="category_lens"/>
         <field name="brand_id" ref="brand_canon"/>
         <field name="model_id" ref="model_hj"/>
         <field name="model_variant">14x4.3</field>
@@ -48,7 +46,6 @@
 
     <!-- Sample iPhone 16 inventory -->
     <record id="inventory_iphone16_001" model="tech.repair.inventory">
-        <field name="category_id" ref="category_smartphone"/>
         <field name="brand_id" ref="brand_apple"/>
         <field name="model_id" ref="model_iphone_16"/>
         <field name="model_variant">Pro Max</field>
@@ -58,7 +55,6 @@
     </record>
     
     <record id="inventory_iphone16_002" model="tech.repair.inventory">
-        <field name="category_id" ref="category_smartphone"/>
         <field name="brand_id" ref="brand_apple"/>
         <field name="model_id" ref="model_iphone_16"/>
         <field name="model_variant">Pro Max</field>

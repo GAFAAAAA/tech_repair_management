@@ -10,7 +10,7 @@ class RepairInventory(models.Model):
     name = fields.Char(string='Inventory Reference', compute='_compute_name', store=True)
     
     # Device information
-    category_id = fields.Many2one('tech.repair.device.category', string='Category', required=True)
+    category_id = fields.Many2one(related='model_id.category_id',comodel_name='tech.repair.device.category',string='Category',store=True,readonly=True,)
     brand_id = fields.Many2one('tech.repair.device.brand', string='Brand', required=True)
     model_id = fields.Many2one('tech.repair.device.model', string='Model', required=True, domain="[('brand_id', '=', brand_id)]")
     model_variant = fields.Char(string="Variant", help="e.g., Pro Max, 14x4.3")
