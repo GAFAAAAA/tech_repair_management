@@ -24,12 +24,12 @@
   </record>
 
   <!-- ********* Variants *********** -->
-  <record id="variant_canon_eos_5d_mkiii" model="tech.repair.device.model.variant">
+  <record id="variant_canon_eos_5d_mkiii" model="tech.repair.device.variant">
     <field name="name">Mark III</field>
     <field name="model_id" ref="model_canon_eos_5d"/>
   </record>
   
-  <record id="variant_canon_eos_5d_mkiv" model="tech.repair.device.model.variant">
+  <record id="variant_canon_eos_5d_mkiv" model="tech.repair.device.variant">
     <field name="name">Mark IV</field>
     <field name="model_id" ref="model_canon_eos_5d"/>
   </record>
