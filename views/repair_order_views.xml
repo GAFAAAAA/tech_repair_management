@@ -28,7 +28,7 @@
                     <!-- Quick Inventory Check-in Section -->
                     <group string="Quick Device Check-in" name="quick_checkin">
                         <!-- changed to type="object" and new method name -->
-                        <button name="action_tech_repair_inventory" type="object" string="Check-in Device to Inventory" class="btn-primary" icon="fa-plus-circle"/>
+                        <button name="action_open_new_device_popup" type="object" string="Check-in Device to Inventory" class="btn-primary" icon="fa-plus-circle"/>
                     </group>
                     
                     <group>
