@@ -21,7 +21,7 @@
                         </group>
                         <group>
                             <field name="status"/>
-                            <field name="repair_order_id" readonly="1" attrs="{'invisible': [('repair_order_id', '=', False)]}"/>
+                            <field name="repair_order_id" readonly="1" invisible="repair_order_id == False"/>
                             <field name="check_in_date" readonly="1"/>
                             <field name="checked_in_by" readonly="1"/>
                         </group>
