@@ -9,5 +9,5 @@ class RepairModel(models.Model):
     brand_id = fields.Many2one('tech.repair.brand', string='Brand')
 
     category_id = fields.Many2one('tech.repair.category', string='Category')
-    variants = fields.one2many('tech.repair.variant', 'model_id', string='Variants')
+    variant_ids = fields.one2many('tech.repair.variant', 'model_id', string='Variants')
     
